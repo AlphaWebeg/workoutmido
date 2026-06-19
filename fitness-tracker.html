@@ -1413,6 +1413,424 @@
     }
 
     /* ===================================
+       DAILY SUMMARY CARD
+       =================================== */
+    .daily-summary-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--t-base);
+    }
+
+    .daily-summary-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-2);
+    }
+
+    .summary-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .summary-metrics {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .metric-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .m-val {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .m-lbl {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .metric-divider {
+      width: 1.5px;
+      height: 38px;
+      background: var(--border);
+    }
+
+    .summary-progress-circle-wrap {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+    }
+
+    .summary-progress-circle {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .summary-progress-circle .circle-bg {
+      fill: none;
+      stroke: var(--surface-2);
+      stroke-width: 3.8;
+    }
+
+    .summary-progress-circle .circle-fill {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 3.8;
+      stroke-linecap: round;
+      transition: stroke-dasharray var(--t-slow);
+    }
+
+    .circle-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .summary-divider {
+      height: 1px;
+      border-top: 1.5px dashed var(--border);
+      margin: 14px 0;
+    }
+
+    .summary-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .summary-list-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--t-fast);
+      user-select: none;
+    }
+
+    .summary-list-item:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .summary-list-item.status-not-started {
+      color: var(--muted);
+      border-color: var(--border);
+      background: var(--surface-2);
+    }
+
+    .summary-list-item.status-not-started:hover {
+      background: var(--primary-light);
+      border-color: var(--primary-dark);
+      color: var(--primary-dark);
+    }
+
+    .summary-list-item.status-in-progress {
+      background: var(--blue-bg);
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .summary-list-item.status-completed {
+      background: var(--green-bg);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .summary-list-item .item-icon {
+      font-size: 0.85rem;
+    }
+
+    .summary-list-item .item-sets-ratio {
+      font-size: 0.7rem;
+      opacity: 0.8;
+      margin-right: 4px;
+    }
+
+    /* ===================================
+       SET CHECKBOX TRACKER
+       =================================== */
+    .set-tracker-container {
+      margin-top: 14px;
+      border-top: 1.5px dashed var(--border);
+      padding-top: 14px;
+    }
+
+    .set-tracker-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-2);
+      margin-bottom: 10px;
+    }
+
+    .set-row-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .set-check-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: all var(--t-fast);
+      user-select: none;
+    }
+
+    .set-check-row:hover {
+      border-color: var(--border-2);
+      background: var(--surface-2);
+    }
+
+    .set-check-row.checked {
+      background: var(--green-bg);
+      border-color: var(--green);
+    }
+
+    .set-check-num {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .set-check-row.checked .set-check-num {
+      color: var(--green);
+    }
+
+    .set-check-reps {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .set-check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border-2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--t-fast);
+      background: var(--surface);
+      color: transparent;
+    }
+
+    .set-check-row:hover .set-check-box {
+      border-color: var(--primary);
+    }
+
+    .set-check-row.checked .set-check-box {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    .set-check-box svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* ===================================
+       FLOATING TIMER WIDGET
+       =================================== */
+    .timer-float-widget {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 360px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid var(--primary-light);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow-xl);
+      padding: 12px 16px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: floatWidgetIn 0.3s ease-out;
+    }
+
+    @keyframes floatWidgetIn {
+      from { transform: translate(-50%, 20px); opacity: 0; }
+      to { transform: translate(-50%, 0); opacity: 1; }
+    }
+
+    .timer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .timer-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--text-2);
+    }
+
+    .timer-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
+      border-radius: var(--r-sm);
+      transition: all var(--t-fast);
+    }
+
+    .timer-close-btn:hover {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    .timer-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .timer-ring-wrap {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .timer-ring {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .timer-ring .timer-ring-bg {
+      fill: none;
+      stroke: var(--primary-light);
+      stroke-width: 4;
+    }
+
+    .timer-ring .timer-ring-fill {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 4;
+      stroke-linecap: round;
+      transition: stroke-dasharray 1s linear;
+    }
+
+    .timer-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: var(--primary);
+      display: flex;
+      align-items: baseline;
+    }
+
+    .timer-text span {
+      font-size: 0.6rem;
+      font-weight: 700;
+      margin-left: 1px;
+    }
+
+    .timer-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .timer-btn {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all var(--t-fast);
+    }
+
+    .timer-btn-plus {
+      background: var(--surface);
+      color: var(--text-2);
+    }
+
+    .timer-btn-plus:hover {
+      background: var(--surface-2);
+      border-color: var(--border-2);
+    }
+
+    .timer-btn-skip {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .timer-btn-skip:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    /* Highlight scroll effect */
+    @keyframes flashHighlight {
+      0% {
+        box-shadow: 0 0 0 3px var(--primary-glow);
+        border-color: var(--primary);
+      }
+      50% {
+        box-shadow: 0 0 0 6px var(--primary-glow);
+        border-color: var(--primary-dark);
+      }
+      100% {
+        box-shadow: none;
+        border-color: var(--border);
+      }
+    }
+
+    .flash-highlight {
+      animation: flashHighlight 1.2s ease-out;
+    }
+
+    /* ===================================
        PREFERS REDUCED MOTION
     =================================== */
     @media (prefers-reduced-motion: reduce) {
@@ -1821,6 +2239,196 @@
     const openMeals = { breakfast: true, preworkout: true, postworkout: true, lunch: true, dinner: true };
     let swapTarget = null; // kept for compat
 
+    // --- WORKOUT PROGRESS STATE ---
+    let workoutProgress = {};
+    try {
+      const saved = localStorage.getItem("workout_progress_v2");
+      if (saved) workoutProgress = JSON.parse(saved);
+    } catch(e) {}
+
+    function saveProgress() {
+      try { localStorage.setItem("workout_progress_v2", JSON.stringify(workoutProgress)); } catch(e) {}
+    }
+
+    // Date helper for day name
+    function getDateOfDayName(dayName) {
+      const dayIndices = { "الأحد": 0, "الاثنين": 1, "الثلاثاء": 2, "الأربعاء": 3, "الخميس": 4, "الجمعة": 5, "السبت": 6 };
+      const targetIdx = dayIndices[dayName];
+      if (targetIdx === undefined) return "";
+      
+      const now = new Date();
+      const currentIdx = now.getDay(); // 0-6
+      let diff = targetIdx - currentIdx;
+      
+      const targetDate = new Date(now);
+      targetDate.setDate(now.getDate() + diff);
+      
+      const y = targetDate.getFullYear();
+      const m = String(targetDate.getMonth() + 1).padStart(2, '0');
+      const d = String(targetDate.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    // Progress calculator helper
+    function getDailyProgress(exercises, dateKey) {
+      const progress = workoutProgress[dateKey] || {};
+      let totalSets = 0;
+      let completedSets = 0;
+      let completedExercises = 0;
+      let inProgressExercises = 0;
+      
+      const exerciseStatuses = exercises.map(ex => {
+        const sets = ex.sets;
+        totalSets += sets;
+        
+        const setStatus = progress[ex.name] || Array(sets).fill(false);
+        const doneCount = setStatus.filter(Boolean).length;
+        completedSets += doneCount;
+        
+        let status = "not_started"; // not_started, in_progress, completed
+        if (doneCount === sets) {
+          status = "completed";
+          completedExercises++;
+        } else if (doneCount > 0) {
+          status = "in_progress";
+          inProgressExercises++;
+        }
+        
+        return {
+          name: ex.name,
+          doneCount,
+          totalSets: sets,
+          status
+        };
+      });
+      
+      return {
+        totalSets,
+        completedSets,
+        completedExercises,
+        totalExercises: exercises.length,
+        exerciseStatuses
+      };
+    }
+
+    // --- REST TIMER STATE ---
+    let timerInterval = null;
+    let timerState = {
+      active: false,
+      duration: 0,
+      remaining: 0,
+      exName: "",
+      setNum: 1
+    };
+
+    function parseRestSeconds(restStr) {
+      if (!restStr) return 60;
+      const num = parseFloat(restStr);
+      if (isNaN(num)) return 60;
+      if (restStr.includes("د")) {
+        return Math.round(num * 60);
+      }
+      return Math.round(num);
+    }
+
+    window.startRestTimer = function(restStr, exName, setNum) {
+      const seconds = parseRestSeconds(restStr);
+      timerState.duration = seconds;
+      timerState.remaining = seconds;
+      timerState.exName = exName;
+      timerState.setNum = setNum;
+      timerState.active = true;
+      
+      clearInterval(timerInterval);
+      renderApp();
+      
+      timerInterval = setInterval(() => {
+        timerState.remaining--;
+        if (timerState.remaining <= 0) {
+          clearInterval(timerInterval);
+          timerState.active = false;
+          playTimerEndNotification();
+        }
+        renderApp();
+      }, 1000);
+    };
+
+    window.stopRestTimer = function() {
+      clearInterval(timerInterval);
+      timerState.active = false;
+      renderApp();
+    };
+
+    window.adjustRestTimer = function(amount) {
+      timerState.remaining = Math.max(0, timerState.remaining + amount);
+      timerState.duration = Math.max(timerState.duration, timerState.remaining);
+      renderApp();
+    };
+
+    window.skipRestTimer = function() {
+      stopRestTimer();
+    };
+
+    function playTimerEndNotification() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const playNote = (freq, delay, duration) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + delay);
+          
+          gain.gain.setValueAtTime(0.15, audioCtx.currentTime + delay);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + duration);
+          
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(audioCtx.currentTime + delay);
+          osc.stop(audioCtx.currentTime + delay + duration);
+        };
+        playNote(523.25, 0, 0.2); // C5
+        playNote(659.25, 0.15, 0.35); // E5
+      } catch (e) {}
+      
+      if (navigator.vibrate) {
+        navigator.vibrate([100, 50, 100]);
+      }
+    }
+
+    window.openAndScrollToExercise = function(exName) {
+      openExercises[exName] = true;
+      renderApp();
+      setTimeout(() => {
+        const cleanId = exName.replace(/\s+/g, '-');
+        const el = document.getElementById(`ex-card-${cleanId}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('flash-highlight');
+          setTimeout(() => el.classList.remove('flash-highlight'), 1200);
+        }
+      }, 100);
+    };
+
+    window.toggleSet = function(exName, setIdx, maxSets, restStr) {
+      const dateKey = getDateOfDayName(activeDay);
+      if (!workoutProgress[dateKey]) {
+        workoutProgress[dateKey] = {};
+      }
+      if (!workoutProgress[dateKey][exName]) {
+        workoutProgress[dateKey][exName] = Array(maxSets).fill(false);
+      }
+      
+      const currentVal = !workoutProgress[dateKey][exName][setIdx];
+      workoutProgress[dateKey][exName][setIdx] = currentVal;
+      saveProgress();
+      
+      if (currentVal) {
+        startRestTimer(restStr, exName, setIdx + 1);
+      }
+      
+      renderApp();
+    };
+
     let mealsState = {};
     try {
       const saved = localStorage.getItem("fitness_tracker_meals_v2");
@@ -1857,6 +2465,28 @@
     }
 
     function pct(v, t) { return Math.min(100, Math.round((v / t) * 100)); }
+
+    function renderSearchResultsHtml(results, query, searching, mKey) {
+      if (searching) return '';
+      if (results && results.length > 0) {
+        return `
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px">
+            ${results.map((r, i) => `
+              <button class="option-btn" onclick="addSearchedFood('${mKey}', ${i})">
+                <div class="option-icon">🔎</div>
+                <div class="option-info">
+                  <div class="option-name">${r.name}</div>
+                  <div class="option-macros">${r.cal} kcal | بروتين ${r.p}غ | كارب ${r.c}غ | دهون ${r.f}غ — لكل 100غ</div>
+                </div>
+              </button>
+            `).join('')}
+          </div>
+        `;
+      } else if (query && query.trim().length >= 2) {
+        return '<div style="text-align:center;color:#94a3b8;padding:20px;font-size:0.85rem">ما لقيناش نتائج — جرب اسم تاني</div>';
+      }
+      return '';
+    }
 
     // ============================================================
     // RENDER
@@ -1967,6 +2597,60 @@
             </div>
           `;
         } else {
+          const dateKey = getDateOfDayName(activeDay);
+          const dailyProg = getDailyProgress(exercises, dateKey);
+          
+          // Daily Summary Card
+          html += `
+            <div class="daily-summary-card fade-in" role="region" aria-label="ملخص اليوم">
+              <div class="summary-top">
+                <div class="summary-metrics">
+                  <div class="metric-item">
+                    <span class="m-val">${dailyProg.completedExercises}/${dailyProg.totalExercises}</span>
+                    <span class="m-lbl">التمارين المكتملة</span>
+                  </div>
+                  <div class="metric-divider"></div>
+                  <div class="metric-item">
+                    <span class="m-val">${dailyProg.completedSets}/${dailyProg.totalSets}</span>
+                    <span class="m-lbl">السيتات المكتملة</span>
+                  </div>
+                </div>
+                
+                <div class="summary-progress-circle-wrap">
+                  <svg class="summary-progress-circle" viewBox="0 0 36 36">
+                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <path class="circle-fill" stroke-dasharray="${pct(dailyProg.completedSets, dailyProg.totalSets)}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  </svg>
+                  <div class="circle-text">${pct(dailyProg.completedSets, dailyProg.totalSets)}%</div>
+                </div>
+              </div>
+              
+              <div class="summary-divider"></div>
+              
+              <div class="summary-list" aria-label="قائمة التمارين السريعة">
+                ${dailyProg.exerciseStatuses.map((exStatus, idx) => {
+                  let statusClass = "status-not-started";
+                  let statusIcon = "○";
+                  if (exStatus.status === "completed") {
+                    statusClass = "status-completed";
+                    statusIcon = "✓";
+                  } else if (exStatus.status === "in_progress") {
+                    statusClass = "status-in-progress";
+                    statusIcon = "•";
+                  }
+                  
+                  return `
+                    <div class="summary-list-item ${statusClass}" onclick="openAndScrollToExercise('${exStatus.name.replace(/'/g, "\\'")}')" role="button" tabindex="0">
+                      <span class="item-icon">${statusIcon}</span>
+                      <span class="item-name">${exStatus.name}</span>
+                      <span class="item-sets-ratio">(${exStatus.doneCount}/${exStatus.totalSets})</span>
+                    </div>
+                  `;
+                }).join("")}
+              </div>
+            </div>
+          `;
+
           html += `<p class="section-heading" aria-label="قسم التمارين">تمارين اليوم — ${exercises.length} تمرين</p>`;
           html += `<div class="ex-list" role="list">`;
 
@@ -2017,6 +2701,31 @@
                 `;
               }
 
+              const currentProgress = (workoutProgress[dateKey] && workoutProgress[dateKey][ex.name]) || Array(ex.sets).fill(false);
+              const setCheckboxesHtml = `
+                <div class="set-tracker-container">
+                  <div class="set-tracker-title">تتبع المجموعات (اضغط لإكمال المجموعة)</div>
+                  <div class="set-row-list">
+                    ${Array.from({ length: ex.sets }).map((_, sIdx) => {
+                      const isDone = currentProgress[sIdx] || false;
+                      return `
+                        <div class="set-check-row ${isDone ? 'checked' : ''}" onclick="toggleSet('${ex.name.replace(/'/g, "\\'")}', ${sIdx}, ${ex.sets}, '${ex.rest}')" role="checkbox" aria-checked="${isDone}" tabindex="0">
+                          <div class="set-check-num">المجموعة ${sIdx + 1}</div>
+                          <div class="set-check-reps">${ex.reps} تكرار</div>
+                          <div class="set-check-box">
+                            ${isDone ? `
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"/>
+                              </svg>
+                            ` : ""}
+                          </div>
+                        </div>
+                      `;
+                    }).join("")}
+                  </div>
+                </div>
+              `;
+
               mediaPanel = `
                 <div class="ex-media-panel">
                   <div class="media-tab-bar" role="tablist" aria-label="نوع الوسائط">
@@ -2057,13 +2766,14 @@
                         <div class="dlbl">العضلة</div>
                       </div>
                     </div>
+                    ${setCheckboxesHtml}
                   </div>
                 </div>
               `;
             }
 
             html += `
-              <div class="ex-card ${isOpen ? 'open' : ''} fade-in" role="listitem">
+              <div id="ex-card-${ex.name.replace(/\s+/g, '-')}" class="ex-card ${isOpen ? 'open' : ''} fade-in" role="listitem">
                 <div class="ex-header" onclick="toggleExercise('${ex.name}')" role="button" tabindex="0" aria-expanded="${isOpen}" aria-label="${ex.name}">
                   <div class="ex-num-badge" aria-hidden="true">${i + 1}</div>
                   <div class="ex-info">
@@ -2304,21 +3014,11 @@
                   id="foodSearchInput"
                   aria-label="بحث عن أكل"
                 />
-                ${fm.searching ? '<div class="search-loading">جاري البحث...</div>' : ''}
+                <div id="searchLoading" class="search-loading" style="display: ${fm.searching ? 'block' : 'none'}">جاري البحث...</div>
               </div>
-              ${fm.searchResults && fm.searchResults.length > 0 ? `
-                <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px">
-                  ${fm.searchResults.map((r,i) => `
-                    <button class="option-btn" onclick="addSearchedFood('${mKey}', ${i})">
-                      <div class="option-icon">🔎</div>
-                      <div class="option-info">
-                        <div class="option-name">${r.name}</div>
-                        <div class="option-macros">${r.cal} kcal | بروتين ${r.p}غ | كارب ${r.c}غ | دهون ${r.f}غ — لكل 100غ</div>
-                      </div>
-                    </button>
-                  `).join('')}
-                </div>
-              ` : (fm.searchQuery && !fm.searching ? '<div style="text-align:center;color:#94a3b8;padding:20px;font-size:0.85rem">ما لقيناش نتائج — جرب اسم تاني</div>' : '')}
+              <div id="searchResultsContainer">
+                ${renderSearchResultsHtml(fm.searchResults, fm.searchQuery, fm.searching, mKey)}
+              </div>
             ` : activeCat === 'custom' ? `
               <div class="custom-food-form">
                 <div class="form-title">أضف أكل مخصص بالماكرو</div>
@@ -2431,6 +3131,31 @@
             </div>
           `;
         }
+
+      // Render Floating Rest Timer Widget
+      if (timerState.active) {
+        const percent = Math.round((timerState.remaining / timerState.duration) * 100);
+        html += `
+          <div class="timer-float-widget fade-in" role="dialog" aria-label="مؤقت الراحة">
+            <div class="timer-header">
+              <span class="timer-title">وقت الراحة: ${timerState.exName} (سيت ${timerState.setNum})</span>
+              <button class="timer-close-btn" onclick="stopRestTimer()" aria-label="إغلاق المؤقت">✕</button>
+            </div>
+            <div class="timer-body">
+              <div class="timer-ring-wrap">
+                <svg class="timer-ring" viewBox="0 0 36 36">
+                  <path class="timer-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="timer-ring-fill" stroke-dasharray="${percent}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                </svg>
+                <div class="timer-text">${timerState.remaining}<span>ث</span></div>
+              </div>
+              <div class="timer-actions">
+                <button class="timer-btn timer-btn-plus" onclick="adjustRestTimer(10)">+10ث</button>
+                <button class="timer-btn timer-btn-skip" onclick="skipRestTimer()">تخطي ➔</button>
+              </div>
+            </div>
+          </div>
+        `;
       }
 
       root.innerHTML = html;
@@ -2549,10 +3274,21 @@
       foodModal.searchQuery = query;
       foodModal.searching = false;
       foodModal.searchResults = [];
+      
+      const loadingEl = document.getElementById('searchLoading');
+      const containerEl = document.getElementById('searchResultsContainer');
+      
       clearTimeout(searchTimer);
-      if (!query || query.trim().length < 2) { renderApp(); return; }
+      if (!query || query.trim().length < 2) {
+        if (loadingEl) loadingEl.style.display = 'none';
+        if (containerEl) containerEl.innerHTML = '';
+        return;
+      }
+      
       foodModal.searching = true;
-      renderApp();
+      if (loadingEl) loadingEl.style.display = 'block';
+      if (containerEl) containerEl.innerHTML = '';
+      
       searchTimer = setTimeout(() => doFoodSearch(query.trim()), 600);
     };
 
@@ -2571,16 +3307,29 @@
           c:   Math.round((p.nutriments['carbohydrates_100g']|| 0) * 10) / 10,
           f:   Math.round((p.nutriments['fat_100g']          || 0) * 10) / 10,
         })).filter(r => r.cal > 0);
-        if (foodModal) {
+        
+        if (foodModal && foodModal.searchQuery === query) {
           foodModal.searching = false;
           foodModal.searchResults = results;
-          renderApp();
+          
+          const loadingEl = document.getElementById('searchLoading');
+          const containerEl = document.getElementById('searchResultsContainer');
+          if (loadingEl) loadingEl.style.display = 'none';
+          if (containerEl) {
+            containerEl.innerHTML = renderSearchResultsHtml(results, query, false, foodModal.mealKey);
+          }
         }
       } catch(e) {
-        if (foodModal) {
+        if (foodModal && foodModal.searchQuery === query) {
           foodModal.searching = false;
           foodModal.searchResults = [];
-          renderApp();
+          
+          const loadingEl = document.getElementById('searchLoading');
+          const containerEl = document.getElementById('searchResultsContainer');
+          if (loadingEl) loadingEl.style.display = 'none';
+          if (containerEl) {
+            containerEl.innerHTML = renderSearchResultsHtml([], query, false, foodModal.mealKey);
+          }
         }
       }
     }
