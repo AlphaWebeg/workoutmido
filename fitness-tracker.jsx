@@ -112,7 +112,7 @@ const EXERCISE_MEDIA = {
   "Serratus Punch": {
     gif: "assets/Push-up_عادي.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/PushUps.gif/220px-PushUps.gif",
-    video: "https://www.youtube.com/embed/H8HMOhcOsKU?controls=1&rel=0"
+    video: "https://www.youtube.com/embed/H8HMOhcOsKU?controls=1&rel=0&autoplay=0"
   },
   "Single Arm Row": {
     gif: "assets/Seated_Row.gif",
@@ -237,23 +237,23 @@ const EXERCISES = {
 };
 
 const CARB_OPTIONS = [
-  { name: "أرز أبيض",     per100g: { cal: 130, p: 2.5, c: 28, f: 0.3 } },
-  { name: "عيش بلدي",     per100g: { cal: 230, p: 7.5, c: 46, f: 1.5 } },
-  { name: "مكرونة مسلوقة",per100g: { cal: 131, p: 5,   c: 25, f: 1.1 } },
-  { name: "بطاطا مسلوقة", per100g: { cal: 87,  p: 1.9, c: 20, f: 0.1 } },
-  { name: "عدس مطبوخ",    per100g: { cal: 116, p: 9,   c: 20, f: 0.4 } },
-  { name: "كشري",         per100g: { cal: 120, p: 4,   c: 22, f: 1.5 } },
+  { name: "أرز مصري (100ج)", per100g: { cal: 130, p: 2.5, c: 30, f: 0.3 } },
+  { name: "مكرونة مسلوقة (100ج)", per100g: { cal: 140, p: 5, c: 28, f: 1.1 } },
+  { name: "خبز بلدي (رغيف)", per100g: { cal: 250, p: 7.5, c: 45, f: 1.5 } },
+  { name: "محشي مشكل (طبق)", per100g: { cal: 350, p: 5, c: 50, f: 10 } },
+  { name: "كشري (علبة وسط)", per100g: { cal: 650, p: 15, c: 80, f: 20 } },
+  { name: "شوفان (100ج)", per100g: { cal: 389, p: 16.9, c: 66, f: 6.9 } },
+  { name: "بطاطس مسلوقة (100ج)", per100g: { cal: 87, p: 1.9, c: 20, f: 0.1 } }
 ];
 
 const PROTEIN_OPTIONS = [
-  { name: "صدر فراخ مسلوق", per100g: { cal: 110, p: 23, c: 0, f: 2  } },
-  { name: "فراخ مشوية",     per100g: { cal: 165, p: 31, c: 0, f: 4  } },
-  { name: "لحمة مشوية",     per100g: { cal: 200, p: 26, c: 0, f: 10 } },
-  { name: "سمك بلطي مشوي",  per100g: { cal: 90,  p: 18, c: 0, f: 2  } },
-  { name: "تونة علبة",       per100g: { cal: 97,  p: 21, c: 0, f: 1  } },
-  { name: "كفتة مشوية",     per100g: { cal: 200, p: 15, c: 2, f: 14 } },
-  { name: "بيض مسلوق",      per100g: { cal: 155, p: 13, c: 1, f: 11 } },
-  { name: "فول مدمس",       per100g: { cal: 90,  p: 6,  c: 15, f: 0.5} },
+  { name: "صدور دجاج مشوية (100ج)", per100g: { cal: 165, p: 30, c: 0, f: 3 } },
+  { name: "تونا مصفاة (100ج)", per100g: { cal: 120, p: 25, c: 0, f: 1 } },
+  { name: "بيض مسلوق (بيضة واحدة)", per100g: { cal: 80, p: 6, c: 0.5, f: 5 } },
+  { name: "كبدة إسكندراني (100ج)", per100g: { cal: 150, p: 20, c: 2, f: 6 } },
+  { name: "حواوشي لحم (رغيف واحد)", per100g: { cal: 550, p: 20, c: 30, f: 35 } },
+  { name: "لحم بقري قليل الدهون (100ج)", per100g: { cal: 200, p: 26, c: 0, f: 10 } },
+  { name: "جبنة قريش (100ج)", per100g: { cal: 98, p: 11, c: 3.4, f: 4 } }
 ];
 
 const BASE_MEALS = {
@@ -698,3 +698,39 @@ export default function App() {
     </>
   );
 }
+
+// مكون لتشغيل الفيديو عند الطلب فقط
+const VideoPlayer = ({ videoUrl, gifUrl }) => {
+  const [showVideo, setShowVideo] = React.useState(false);
+  const [useGif, setUseGif] = React.useState(false);
+  const videoId = videoUrl.split('/embed/')[1]?.split('?')[0];
+  
+  return (
+    <div style={{ width: '100%', position: 'relative' }}>
+      <button onClick={() => setUseGif(!useGif)} style={{ marginBottom: '10px' }}>
+        {useGif ? "عرض الفيديو" : "عرض الـ GIF (في حال تعطل الفيديو)"}
+      </button>
+      
+      {useGif ? (
+        <img src={gifUrl} alt="Exercise GIF" style={{ width: '100%' }} />
+      ) : !showVideo ? (
+        <div 
+          onClick={() => setShowVideo(true)} 
+          style={{ cursor: 'pointer', position: 'relative', width: '100%', aspectRatio: '16/9', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <img src={`https://img.youtube.com/vi/${videoId}/0.jpg`} alt="Play Video" style={{ width: '100%', opacity: 0.7 }} />
+          <div style={{ position: 'absolute', fontSize: '50px', color: 'white' }}>▶</div>
+        </div>
+      ) : (
+        <iframe 
+          width="100%" 
+          height="100%" 
+          src={`${videoUrl}&autoplay=1`} 
+          frameBorder="0" 
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+          allowFullScreen
+        />
+      )}
+    </div>
+  );
+};
