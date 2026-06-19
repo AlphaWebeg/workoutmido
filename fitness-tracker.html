@@ -1241,6 +1241,178 @@
     }
 
     /* ===================================
+       FOOD SYSTEM — Add / Search / Custom
+    =================================== */
+    .add-food-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 9px 14px;
+      background: var(--primary-light);
+      border: 1.5px dashed var(--primary);
+      color: var(--primary);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: var(--r-md);
+      transition: all var(--t-base);
+    }
+
+    .add-food-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-style: solid;
+    }
+
+    /* Food modal category tabs */
+    .food-modal-tabs {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .food-modal-tab {
+      padding: 5px 11px;
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-full);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all var(--t-base);
+      white-space: nowrap;
+    }
+
+    .food-modal-tab:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .food-modal-tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    /* Search box */
+    .search-box-wrap {
+      margin-bottom: 6px;
+    }
+
+    .search-box-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      direction: rtl;
+      transition: all var(--t-base);
+    }
+
+    .search-box-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .search-loading {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 10px;
+    }
+
+    /* Custom food form */
+    .custom-food-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 8px 10px;
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-sm);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      direction: rtl;
+      transition: all var(--t-base);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .add-confirm-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      border: none;
+      border-radius: var(--r-md);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: white;
+      cursor: pointer;
+      transition: all var(--t-base);
+      box-shadow: 0 2px 8px var(--primary-glow);
+    }
+
+    .add-confirm-btn:hover:not(:disabled) {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .add-confirm-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    /* ===================================
        PREFERS REDUCED MOTION
     =================================== */
     @media (prefers-reduced-motion: reduce) {
@@ -1515,25 +1687,79 @@
       ],
     };
 
-    const CARB_OPTIONS = [
-      { name: "أرز أبيض",      icon: "🍚", per100g: { cal: 130, p: 2.5, c: 28, f: 0.3 } },
-      { name: "عيش بلدي",      icon: "🥖", per100g: { cal: 230, p: 7.5, c: 46, f: 1.5 } },
-      { name: "مكرونة مسلوقة", icon: "🍝", per100g: { cal: 131, p: 5,   c: 25, f: 1.1 } },
-      { name: "بطاطا مسلوقة",  icon: "🥔", per100g: { cal: 87,  p: 1.9, c: 20, f: 0.1 } },
-      { name: "عدس مطبوخ",     icon: "🫘", per100g: { cal: 116, p: 9,   c: 20, f: 0.4 } },
-      { name: "كشري",          icon: "🍲", per100g: { cal: 120, p: 4,   c: 22, f: 1.5 } },
-    ];
+    // ============================================================
+    // EGYPTIAN FOOD DATABASE — أكل مصري بسيط ومتاح في كل بيت
+    // ============================================================
+    const EGYPTIAN_FOODS = {
+      carb: [
+        { name: "أرز أبيض",          icon: "🍚", per100g: { cal: 130, p: 2.5, c: 28,  f: 0.3 } },
+        { name: "عيش بلدي",          icon: "🥖", per100g: { cal: 230, p: 7.5, c: 46,  f: 1.5 } },
+        { name: "عيش فينو",          icon: "🍞", per100g: { cal: 265, p: 9,   c: 50,  f: 3.2 } },
+        { name: "عيش تميس",          icon: "🥙", per100g: { cal: 270, p: 9,   c: 52,  f: 2.5 } },
+        { name: "مكرونة مسلوقة",     icon: "🍝", per100g: { cal: 131, p: 5,   c: 25,  f: 1.1 } },
+        { name: "بطاطا مسلوقة",      icon: "🥔", per100g: { cal: 87,  p: 1.9, c: 20,  f: 0.1 } },
+        { name: "بطاطا فرن",         icon: "🥔", per100g: { cal: 93,  p: 2.5, c: 21,  f: 0.1 } },
+        { name: "عدس أحمر مطبوخ",   icon: "🫘", per100g: { cal: 116, p: 9,   c: 20,  f: 0.4 } },
+        { name: "فول نابت",          icon: "🌱", per100g: { cal: 66,  p: 4.4, c: 11,  f: 0.4 } },
+        { name: "كشري",              icon: "🍲", per100g: { cal: 120, p: 4,   c: 22,  f: 1.5 } },
+        { name: "أرز بالشعيرية",     icon: "🍚", per100g: { cal: 140, p: 3,   c: 29,  f: 1.5 } },
+        { name: "ذرة صفراء مسلوقة",  icon: "🌽", per100g: { cal: 96,  p: 3.4, c: 21,  f: 1.5 } },
+        { name: "بسكويت مالح",       icon: "🫙", per100g: { cal: 420, p: 8,   c: 70,  f: 13  } },
+        { name: "شوفان مغلي بالمياه",icon: "🥣", per100g: { cal: 71,  p: 2.5, c: 12,  f: 1.5 } },
+      ],
+      protein: [
+        { name: "صدر فراخ مسلوق",   icon: "🍗", per100g: { cal: 110, p: 23,  c: 0,   f: 2   } },
+        { name: "صدر فراخ مشوي",    icon: "🍗", per100g: { cal: 120, p: 24,  c: 0,   f: 2.5 } },
+        { name: "فراخ مشوية بالجلد",icon: "🍗", per100g: { cal: 165, p: 31,  c: 0,   f: 4   } },
+        { name: "كبدة دجاج مطبوخة", icon: "🍖", per100g: { cal: 165, p: 24,  c: 1,   f: 7   } },
+        { name: "بيض مسلوق",         icon: "🥚", per100g: { cal: 155, p: 13,  c: 1,   f: 11  } },
+        { name: "بيض مقلي بزيت قليل",icon:"🍳", per100g: { cal: 196, p: 14,  c: 1,   f: 15  } },
+        { name: "تونة علبة بالمياه", icon: "🐟", per100g: { cal: 97,  p: 21,  c: 0,   f: 1   } },
+        { name: "سمك بلطي مشوي",    icon: "🐟", per100g: { cal: 90,  p: 18,  c: 0,   f: 2   } },
+        { name: "سردين علبة",        icon: "🐟", per100g: { cal: 208, p: 25,  c: 0,   f: 11  } },
+        { name: "لحمة مفرومة مشوية", icon: "🥩", per100g: { cal: 215, p: 26,  c: 0,   f: 12  } },
+        { name: "كفتة مشوية",        icon: "🥩", per100g: { cal: 200, p: 15,  c: 2,   f: 14  } },
+        { name: "فول مدمس",          icon: "🫘", per100g: { cal: 90,  p: 6,   c: 15,  f: 0.5 } },
+        { name: "جبن أبيض قريش",     icon: "🧀", per100g: { cal: 72,  p: 12,  c: 3,   f: 0.4 } },
+        { name: "جبن أبيض (فيتا)",   icon: "🧀", per100g: { cal: 183, p: 13,  c: 1,   f: 14  } },
+        { name: "لبن رايب",           icon: "🥛", per100g: { cal: 61,  p: 3.5, c: 5,   f: 3.3 } },
+        { name: "لبن بقر كامل",       icon: "🥛", per100g: { cal: 61,  p: 3.2, c: 4.8, f: 3.3 } },
+      ],
+      fat: [
+        { name: "زيت ذرة",           icon: "🫙", per100g: { cal: 884, p: 0,   c: 0,   f: 100 } },
+        { name: "زيت عباد الشمس",    icon: "🫙", per100g: { cal: 884, p: 0,   c: 0,   f: 100 } },
+        { name: "زيت زيتون",         icon: "🫒", per100g: { cal: 884, p: 0,   c: 0,   f: 100 } },
+        { name: "سمنة بلدي",         icon: "🧈", per100g: { cal: 897, p: 0.9, c: 0,   f: 99  } },
+        { name: "زبدة",              icon: "🧈", per100g: { cal: 717, p: 0.9, c: 0.1, f: 81  } },
+        { name: "طحينة",             icon: "🫙", per100g: { cal: 595, p: 17,  c: 21,  f: 54  } },
+      ],
+      veg: [
+        { name: "طماطم",             icon: "🍅", per100g: { cal: 18,  p: 0.9, c: 3.9, f: 0.2 } },
+        { name: "خيار",              icon: "🥒", per100g: { cal: 16,  p: 0.7, c: 3.6, f: 0.1 } },
+        { name: "خس",               icon: "🥬", per100g: { cal: 15,  p: 1.4, c: 2.9, f: 0.2 } },
+        { name: "بصل",              icon: "🧅", per100g: { cal: 40,  p: 1.1, c: 9.3, f: 0.1 } },
+        { name: "جرجير",             icon: "🌿", per100g: { cal: 25,  p: 2.6, c: 3.7, f: 0.7 } },
+        { name: "ملوخية مطبوخة",    icon: "🌿", per100g: { cal: 35,  p: 2.4, c: 5.5, f: 0.5 } },
+        { name: "كوسة مطبوخة",      icon: "🥒", per100g: { cal: 17,  p: 1.2, c: 3.5, f: 0.4 } },
+        { name: "فلفل ألوان",        icon: "🫑", per100g: { cal: 31,  p: 1,   c: 6,   f: 0.3 } },
+        { name: "باذنجان مشوي",      icon: "🍆", per100g: { cal: 35,  p: 0.8, c: 8.7, f: 0.2 } },
+        { name: "سلطة خضراء بزيت",  icon: "🥗", per100g: { cal: 53,  p: 1,   c: 4,   f: 4   } },
+      ],
+      fruit: [
+        { name: "موزة",              icon: "🍌", per100g: { cal: 89,  p: 1.1, c: 23,  f: 0.3 } },
+        { name: "تفاحة",             icon: "🍎", per100g: { cal: 52,  p: 0.3, c: 14,  f: 0.2 } },
+        { name: "برتقالة",           icon: "🍊", per100g: { cal: 47,  p: 0.9, c: 12,  f: 0.1 } },
+        { name: "مانجو",             icon: "🥭", per100g: { cal: 60,  p: 0.8, c: 15,  f: 0.4 } },
+        { name: "بطيخ",              icon: "🍉", per100g: { cal: 30,  p: 0.6, c: 8,   f: 0.2 } },
+        { name: "عنب",               icon: "🍇", per100g: { cal: 69,  p: 0.7, c: 18,  f: 0.2 } },
+        { name: "تمر",               icon: "🌴", per100g: { cal: 277, p: 1.8, c: 75,  f: 0.2 } },
+        { name: "جوافة",             icon: "🍈", per100g: { cal: 68,  p: 2.6, c: 14,  f: 1   } },
+      ],
+    };
 
-    const PROTEIN_OPTIONS = [
-      { name: "صدر فراخ مسلوق", icon: "🍗", per100g: { cal: 110, p: 23, c: 0, f: 2  } },
-      { name: "فراخ مشوية",     icon: "🍗", per100g: { cal: 165, p: 31, c: 0, f: 4  } },
-      { name: "لحمة مشوية",     icon: "🥩", per100g: { cal: 200, p: 26, c: 0, f: 10 } },
-      { name: "سمك بلطي مشوي",  icon: "🐟", per100g: { cal: 90,  p: 18, c: 0, f: 2  } },
-      { name: "تونة علبة",      icon: "🐟", per100g: { cal: 97,  p: 21, c: 0, f: 1  } },
-      { name: "كفتة مشوية",     icon: "🥩", per100g: { cal: 200, p: 15, c: 2, f: 14 } },
-      { name: "بيض مسلوق",      icon: "🥚", per100g: { cal: 155, p: 13, c: 1, f: 11 } },
-      { name: "فول مدمس",       icon: "🫘", per100g: { cal: 90,  p: 6,  c: 15, f: 0.5} },
-    ];
+    // For backward compat with swap modal
+    const CARB_OPTIONS    = EGYPTIAN_FOODS.carb;
+    const PROTEIN_OPTIONS = EGYPTIAN_FOODS.protein;
 
     const BASE_MEALS = {
       breakfast:   { label: "الإفطار",      icon: "☀️", mealClass: "breakfast", items: [
@@ -1569,6 +1795,23 @@
     const TARGETS = { cal: 2490, p: 130, c: 335, f: 70 };
 
     // ============================================================
+    // FOOD SEARCH STATE
+    // ============================================================
+    let foodModal = null;
+    // foodModal = { mealKey, mode: 'swap'|'add'|'search', idx?, searchResults: [], searchQuery: '', customFood: {name,cal,p,c,f,grams} }
+
+    // Load custom foods from localStorage
+    let customFoodDB = [];
+    try {
+      const saved = localStorage.getItem('custom_foods_db');
+      if (saved) customFoodDB = JSON.parse(saved);
+    } catch(e) {}
+
+    function saveCustomFoods() {
+      try { localStorage.setItem('custom_foods_db', JSON.stringify(customFoodDB)); } catch(e) {}
+    }
+
+    // ============================================================
     // STATE
     // ============================================================
     let activeDay = DAYS[new Date().getDay()];
@@ -1576,7 +1819,7 @@
     const openExercises = {};
     const activeMediaTabs = {};
     const openMeals = { breakfast: true, preworkout: true, postworkout: true, lunch: true, dinner: true };
-    let swapTarget = null;
+    let swapTarget = null; // kept for compat
 
     let mealsState = {};
     try {
@@ -1924,11 +2167,16 @@
                         />
                         <span class="gram-unit">غ</span>
                       </div>
-                      ${canSwap ? `
-                        <button class="swap-btn" onclick="openSwapModal('${mealKey}', ${idx})" aria-label="تغيير ${item.name}">
-                          تغيير
+                      <div style="display:flex;gap:4px;flex-shrink:0">
+                        ${canSwap ? `
+                          <button class="swap-btn" onclick="openFoodModal('${mealKey}', 'swap', ${idx})" aria-label="تغيير ${item.name}" title="استبدال">
+                            ⇄
+                          </button>
+                        ` : ""}
+                        <button class="swap-btn" style="color:#ef4444;border-color:#fca5a5" onclick="deleteFood('${mealKey}', ${idx})" aria-label="حذف ${item.name}" title="حذف">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
                         </button>
-                      ` : ""}
+                      </div>
                     </div>
                   `;
                 }).join("")}
@@ -1937,6 +2185,16 @@
                   <span class="meal-summary-item">بروتين: <span style="color:#3b82f6">${Math.round(mealTotals.p)}غ</span></span>
                   <span class="meal-summary-item">كارب: <span style="color:#10b981">${Math.round(mealTotals.c)}غ</span></span>
                   <span class="meal-summary-item">دهون: <span style="color:#8b5cf6">${Math.round(mealTotals.f)}غ</span></span>
+                </div>
+                <div style="padding:8px 16px">
+                  <button
+                    class="add-food-btn"
+                    onclick="openFoodModal('${mealKey}', 'add')"
+                    aria-label="إضافة أكل لوجبة ${meal.label}"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    إضافة أكل
+                  </button>
                 </div>
               </div>
             `;
@@ -1976,8 +2234,176 @@
         html += `</div>`;
       }
 
-      // Swap Modal
-      if (swapTarget) {
+      // ─────────────────────────────────────────────────
+      // FOOD MODAL
+      // ─────────────────────────────────────────────────
+      if (foodModal) {
+        const fm = foodModal;
+        const mKey = fm.mealKey;
+        const mLabel = BASE_MEALS[mKey] ? BASE_MEALS[mKey].label : '';
+
+        // Build category tabs for 'add' mode
+        const cats = [
+          { key:'protein', label:'بروتين' },
+          { key:'carb',    label:'كارب' },
+          { key:'veg',     label:'خضار' },
+          { key:'fat',     label:'دهون' },
+          { key:'fruit',   label:'فاكهة' },
+        ];
+        const activeCat = fm.activeCat || 'protein';
+
+        let modalBody = '';
+
+        // ─── mode: swap (like before but richer) ───
+        if (fm.mode === 'swap') {
+          const item = mealsState[activeDay][mKey][fm.idx];
+          const opts = item.category === 'carb' ? EGYPTIAN_FOODS.carb : EGYPTIAN_FOODS.protein;
+          modalBody = `
+            <div class="modal-title">استبدال "${item.name}"</div>
+            <div class="modal-subtitle">اختار البديل — الأكل المصري المتاح</div>
+            <div class="modal-divider"></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              ${opts.map(o => `
+                <button class="option-btn" onclick="doSwapFood('${mKey}', ${fm.idx}, '${o.name.replace(/'/g,"\\'")}')"
+                  title="${o.per100g.cal} kcal لكل 100غ">
+                  <div class="option-icon">${o.icon}</div>
+                  <div class="option-info">
+                    <div class="option-name">${o.name}</div>
+                    <div class="option-macros">${o.per100g.cal} kcal | بروتين ${o.per100g.p}غ | كارب ${o.per100g.c}غ | دهون ${o.per100g.f}غ</div>
+                  </div>
+                </button>
+              `).join('')}
+            </div>
+          `;
+        }
+
+        // ─── mode: add (Egyptian DB by category) ───
+        else if (fm.mode === 'add') {
+          const foods = EGYPTIAN_FOODS[activeCat] || [];
+          const allCustom = customFoodDB;
+          modalBody = `
+            <div class="modal-title">إضافة أكل لـ ${mLabel}</div>
+            <div class="modal-subtitle">اختار من قاعدة بيانات الأكل المصري</div>
+            <div class="food-modal-tabs">
+              ${cats.map(c => `
+                <button class="food-modal-tab ${activeCat===c.key?'active':''}" onclick="setFoodModalCat('${c.key}')">${c.label}</button>
+              `).join('')}
+              <button class="food-modal-tab ${activeCat==='custom'?'active':''}" onclick="setFoodModalCat('custom')">⭐ مخصص</button>
+              <button class="food-modal-tab ${activeCat==='search'?'active':''}" onclick="setFoodModalCat('search')">🔍 بحث</button>
+            </div>
+            <div class="modal-divider"></div>
+
+            ${activeCat === 'search' ? `
+              <div class="search-box-wrap">
+                <input
+                  class="search-box-input"
+                  type="text"
+                  placeholder="ابحث بالاسم (عربي أو انجليزي)..."
+                  value="${fm.searchQuery || ''}"
+                  oninput="handleFoodSearch(this.value)"
+                  id="foodSearchInput"
+                  aria-label="بحث عن أكل"
+                />
+                ${fm.searching ? '<div class="search-loading">جاري البحث...</div>' : ''}
+              </div>
+              ${fm.searchResults && fm.searchResults.length > 0 ? `
+                <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px">
+                  ${fm.searchResults.map((r,i) => `
+                    <button class="option-btn" onclick="addSearchedFood('${mKey}', ${i})">
+                      <div class="option-icon">🔎</div>
+                      <div class="option-info">
+                        <div class="option-name">${r.name}</div>
+                        <div class="option-macros">${r.cal} kcal | بروتين ${r.p}غ | كارب ${r.c}غ | دهون ${r.f}غ — لكل 100غ</div>
+                      </div>
+                    </button>
+                  `).join('')}
+                </div>
+              ` : (fm.searchQuery && !fm.searching ? '<div style="text-align:center;color:#94a3b8;padding:20px;font-size:0.85rem">ما لقيناش نتائج — جرب اسم تاني</div>' : '')}
+            ` : activeCat === 'custom' ? `
+              <div class="custom-food-form">
+                <div class="form-title">أضف أكل مخصص بالماكرو</div>
+                <input class="form-input" type="text" placeholder="اسم الأكل *" id="cf_name" oninput="updateCustomForm()" aria-label="اسم الأكل"/>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">سعرات (لكل 100غ) *</label>
+                    <input class="form-input" type="number" min="0" placeholder="مثال: 150" id="cf_cal" oninput="updateCustomForm()" aria-label="السعرات الحرارية"/>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">بروتين (غ)</label>
+                    <input class="form-input" type="number" min="0" step="0.1" placeholder="0" id="cf_p" oninput="updateCustomForm()" aria-label="البروتين"/>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">كارب (غ)</label>
+                    <input class="form-input" type="number" min="0" step="0.1" placeholder="0" id="cf_c" oninput="updateCustomForm()" aria-label="الكارب"/>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">دهون (غ)</label>
+                    <input class="form-input" type="number" min="0" step="0.1" placeholder="0" id="cf_f" oninput="updateCustomForm()" aria-label="الدهون"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">الكمية بالجرام *</label>
+                  <input class="form-input" type="number" min="1" placeholder="مثال: 200" id="cf_grams" oninput="updateCustomForm()" aria-label="الكمية بالجرام"/>
+                </div>
+                <button class="add-confirm-btn" id="cf_submit" onclick="addCustomFood('${mKey}')" disabled>إضافة للوجبة</button>
+                ${allCustom.length > 0 ? `
+                  <div style="margin-top:14px">
+                    <div style="font-size:0.78rem;font-weight:700;color:#64748b;margin-bottom:8px">أكلك المحفوظ مسبقاً:</div>
+                    ${allCustom.map((cf,i) => `
+                      <button class="option-btn" onclick="addSavedCustomFood('${mKey}', ${i})" style="margin-bottom:5px">
+                        <div class="option-icon">⭐</div>
+                        <div class="option-info">
+                          <div class="option-name">${cf.name}</div>
+                          <div class="option-macros">${cf.cal} kcal | بروتين ${cf.p}غ | كارب ${cf.c}غ | دهون ${cf.f}غ — لكل 100غ</div>
+                        </div>
+                      </button>
+                    `).join('')}
+                  </div>
+                ` : ''}
+              </div>
+            ` : `
+              <div style="display:flex;flex-direction:column;gap:6px">
+                ${foods.map(o => `
+                  <button class="option-btn" onclick="addEgyptianFood('${mKey}', '${o.name.replace(/'/g,"\\'")}')"
+                    title="${o.per100g.cal} kcal لكل 100غ">
+                    <div class="option-icon">${o.icon}</div>
+                    <div class="option-info">
+                      <div class="option-name">${o.name}</div>
+                      <div class="option-macros">${o.per100g.cal} kcal | بروتين ${o.per100g.p}غ | كارب ${o.per100g.c}غ | دهون ${o.per100g.f}غ — لكل 100غ</div>
+                    </div>
+                  </button>
+                `).join('')}
+              </div>
+            `}
+          `;
+        }
+
+        html += `
+          <div class="modal-overlay" onclick="closeFoodModal()" role="dialog" aria-modal="true" aria-label="إدارة الأكل">
+            <div class="modal" onclick="event.stopPropagation()" style="padding-bottom:env(safe-area-inset-bottom,16px)">
+              <div class="modal-handle" aria-hidden="true"></div>
+              ${modalBody}
+              <button class="close-btn" onclick="closeFoodModal()" style="margin-top:12px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                إغلاق
+              </button>
+            </div>
+          </div>
+        `;
+
+        // Auto-focus search input after render
+        if (fm.mode === 'add' && (fm.activeCat === 'search')) {
+          setTimeout(() => {
+            const inp = document.getElementById('foodSearchInput');
+            if (inp) inp.focus();
+          }, 50);
+        }
+      }
+
+      // Legacy swap modal (fallback)
+      if (swapTarget && !foodModal) {
         const item = swapTarget.item;
         const options = item.category === "carb" ? CARB_OPTIONS : item.category === "protein" ? PROTEIN_OPTIONS : null;
         if (options) {
@@ -2018,6 +2444,163 @@
     window.toggleExercise = function(exName) { openExercises[exName] = !openExercises[exName]; renderApp(); };
     window.setMediaTab = function(exName, tabType) { activeMediaTabs[exName] = tabType; renderApp(); };
     window.toggleMeal = function(mealKey) { openMeals[mealKey] = !openMeals[mealKey]; renderApp(); };
+
+    // ─── Food Modal ───────────────────────────────────────
+    window.openFoodModal = function(mealKey, mode, idx) {
+      foodModal = { mealKey, mode, idx: idx !== undefined ? idx : null, activeCat: 'protein', searchQuery: '', searchResults: [], searching: false };
+      renderApp();
+    };
+    window.closeFoodModal = function() { foodModal = null; renderApp(); };
+    window.setFoodModalCat = function(cat) {
+      if (foodModal) { foodModal.activeCat = cat; renderApp(); }
+    };
+
+    // ─── Add Egyptian food to meal ─────────────────────────
+    window.addEgyptianFood = function(mealKey, foodName) {
+      const allFoods = Object.values(EGYPTIAN_FOODS).flat();
+      const food = allFoods.find(f => f.name === foodName);
+      if (!food) return;
+      mealsState[activeDay][mealKey].push({
+        id: 'custom_' + Date.now(),
+        name: food.name,
+        category: 'custom',
+        grams: 100,
+        per100g: { ...food.per100g }
+      });
+      saveMeals();
+      foodModal = null;
+      renderApp();
+    };
+
+    // ─── Swap food using Egyptian DB ──────────────────────
+    window.doSwapFood = function(mealKey, idx, foodName) {
+      const allFoods = Object.values(EGYPTIAN_FOODS).flat();
+      const food = allFoods.find(f => f.name === foodName);
+      if (!food) return;
+      const item = mealsState[activeDay][mealKey][idx];
+      item.name = food.name;
+      item.per100g = { ...food.per100g };
+      saveMeals();
+      foodModal = null;
+      renderApp();
+    };
+
+    // ─── Delete food from meal ─────────────────────────────
+    window.deleteFood = function(mealKey, idx) {
+      mealsState[activeDay][mealKey].splice(idx, 1);
+      saveMeals();
+      renderApp();
+    };
+
+    // ─── Custom food form (manual entry) ──────────────────
+    window.updateCustomForm = function() {
+      const name  = (document.getElementById('cf_name')  || {}).value || '';
+      const cal   = (document.getElementById('cf_cal')   || {}).value || '';
+      const grams = (document.getElementById('cf_grams') || {}).value || '';
+      const btn   = document.getElementById('cf_submit');
+      if (btn) btn.disabled = !(name.trim() && cal && grams);
+    };
+
+    window.addCustomFood = function(mealKey) {
+      const name  = (document.getElementById('cf_name')  || {}).value || '';
+      const cal   = parseFloat((document.getElementById('cf_cal')   || {}).value) || 0;
+      const p     = parseFloat((document.getElementById('cf_p')     || {}).value) || 0;
+      const c     = parseFloat((document.getElementById('cf_c')     || {}).value) || 0;
+      const f     = parseFloat((document.getElementById('cf_f')     || {}).value) || 0;
+      const grams = parseFloat((document.getElementById('cf_grams') || {}).value) || 100;
+      if (!name.trim() || !cal) return;
+      const per100g = { cal, p, c, f };
+      // Save to custom DB if not already there
+      if (!customFoodDB.find(x => x.name === name)) {
+        customFoodDB.push({ name, cal, p, c, f });
+        saveCustomFoods();
+      }
+      mealsState[activeDay][mealKey].push({
+        id: 'custom_' + Date.now(),
+        name: name.trim(),
+        category: 'custom',
+        grams,
+        per100g
+      });
+      saveMeals();
+      foodModal = null;
+      renderApp();
+    };
+
+    window.addSavedCustomFood = function(mealKey, cfIdx) {
+      const cf = customFoodDB[cfIdx];
+      if (!cf) return;
+      mealsState[activeDay][mealKey].push({
+        id: 'custom_' + Date.now(),
+        name: cf.name,
+        category: 'custom',
+        grams: 100,
+        per100g: { cal: cf.cal, p: cf.p, c: cf.c, f: cf.f }
+      });
+      saveMeals();
+      foodModal = null;
+      renderApp();
+    };
+
+    // ─── Open Food Facts Search ────────────────────────────
+    let searchTimer = null;
+    window.handleFoodSearch = function(query) {
+      if (!foodModal) return;
+      foodModal.searchQuery = query;
+      foodModal.searching = false;
+      foodModal.searchResults = [];
+      clearTimeout(searchTimer);
+      if (!query || query.trim().length < 2) { renderApp(); return; }
+      foodModal.searching = true;
+      renderApp();
+      searchTimer = setTimeout(() => doFoodSearch(query.trim()), 600);
+    };
+
+    async function doFoodSearch(query) {
+      if (!foodModal) return;
+      try {
+        const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(query)}&search_simple=1&action=process&json=1&page_size=10&lc=ar`;
+        const res = await fetch(url);
+        const data = await res.json();
+        const results = (data.products || []).filter(p =>
+          p.product_name && p.nutriments
+        ).slice(0, 8).map(p => ({
+          name: p.product_name_ar || p.product_name || p.abbreviated_product_name || query,
+          cal: Math.round(p.nutriments['energy-kcal_100g'] || p.nutriments['energy-kcal'] || 0),
+          p:   Math.round((p.nutriments['proteins_100g']     || 0) * 10) / 10,
+          c:   Math.round((p.nutriments['carbohydrates_100g']|| 0) * 10) / 10,
+          f:   Math.round((p.nutriments['fat_100g']          || 0) * 10) / 10,
+        })).filter(r => r.cal > 0);
+        if (foodModal) {
+          foodModal.searching = false;
+          foodModal.searchResults = results;
+          renderApp();
+        }
+      } catch(e) {
+        if (foodModal) {
+          foodModal.searching = false;
+          foodModal.searchResults = [];
+          renderApp();
+        }
+      }
+    }
+
+    window.addSearchedFood = function(mealKey, resultIdx) {
+      if (!foodModal || !foodModal.searchResults[resultIdx]) return;
+      const r = foodModal.searchResults[resultIdx];
+      mealsState[activeDay][mealKey].push({
+        id: 'search_' + Date.now(),
+        name: r.name,
+        category: 'custom',
+        grams: 100,
+        per100g: { cal: r.cal, p: r.p, c: r.c, f: r.f }
+      });
+      saveMeals();
+      foodModal = null;
+      renderApp();
+    };
+
+    // ─── Legacy swap & gram handlers ──────────────────────
     window.openSwapModal = function(mealKey, idx) {
       swapTarget = { mealKey, idx, item: mealsState[activeDay][mealKey][idx] };
       renderApp();
