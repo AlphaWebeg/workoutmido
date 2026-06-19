@@ -1880,6 +1880,56 @@
       animation: flashHighlight 1.2s ease-out;
     }
 
+    /* Switch styles */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 28px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background-color: #cbd5e1;
+      transition: var(--t-base);
+      border-radius: var(--r-full);
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: var(--t-base);
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--primary);
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px var(--primary);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(22px);
+    }
+
     /* ===================================
        PREFERS REDUCED MOTION
     =================================== */
@@ -2359,8 +2409,6 @@
       ]},
     };
 
-    const TARGETS = { cal: 2490, p: 130, c: 335, f: 70 };
-
     // ============================================================
     // FOOD SEARCH STATE
     // ============================================================
@@ -2387,6 +2435,45 @@
     const videoPlaying = {};
     const openMeals = { breakfast: true, preworkout: true, postworkout: true, lunch: true, dinner: true };
     let swapTarget = null; // kept for compat
+    
+    // Settings state
+    let settings = {};
+    try {
+      const saved = localStorage.getItem('workout_settings');
+      if (saved) settings = JSON.parse(saved);
+    } catch(e) {}
+    
+    // Default settings
+    const defaultSettings = {
+      // Body settings
+      weight: 70, // kg
+      height: 170, // cm
+      age: 25,
+      gender: 'male', // male, female
+      
+      // Goal settings
+      goalWeight: 70,
+      goalCalories: 2490,
+      goalProtein: 130, // grams
+      goalCarbs: 335, // grams
+      goalFat: 70, // grams
+      activityLevel: 'moderate', // sedentary, light, moderate, active, very-active
+      
+      // App settings
+      darkMode: false,
+      language: 'ar',
+      notifications: true,
+      restTimer: 60, // seconds
+    };
+    
+    // Merge with defaults
+    settings = { ...defaultSettings, ...settings };
+    
+    // Update TARGETS from settings
+    const TARGETS = { cal: settings.goalCalories, p: settings.goalProtein, c: settings.goalCarbs, f: settings.goalFat };
+    
+    // Apply dark mode
+    applyDarkMode();
 
     // --- WORKOUT PROGRESS STATE ---
     let workoutProgress = {};
@@ -2755,6 +2842,19 @@
             </svg>
             التغذية
           </button>
+          <button
+            class="tab-nav-btn ${currentTab === 'settings' ? 'active' : ''}"
+            onclick="setTab('settings')"
+            role="tab"
+            aria-selected="${currentTab === 'settings'}"
+            id="tab-settings"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            الإعدادات
+          </button>
         </div>
       `;
 
@@ -3099,6 +3199,320 @@
         html += `</div>`;
       }
 
+      // --- SETTINGS TAB ---
+      if (currentTab === "settings") {
+        html += `<p class="section-heading" aria-label="قسم الإعدادات الشخصية">معلومات الجسم</p>`;
+        html += `
+          <div class="ex-list" role="list">
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">⚖️</div>
+                <div class="ex-info">
+                  <div class="ex-name">الوزن الحالي</div>
+                </div>
+                <div class="ex-right">
+                  <div class="gram-wrapper">
+                    <input
+                      class="gram-input"
+                      type="number"
+                      value="${settings.weight}"
+                      min="30"
+                      max="300"
+                      step="0.5"
+                      aria-label="الوزن بالكيلوغرام"
+                      onchange="updateSetting('weight', this.value)"
+                    />
+                    <span class="gram-unit">كجم</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">📏</div>
+                <div class="ex-info">
+                  <div class="ex-name">الطول</div>
+                </div>
+                <div class="ex-right">
+                  <div class="gram-wrapper">
+                    <input
+                      class="gram-input"
+                      type="number"
+                      value="${settings.height}"
+                      min="100"
+                      max="250"
+                      aria-label="الطول بالسنتيمتر"
+                      onchange="updateSetting('height', this.value)"
+                    />
+                    <span class="gram-unit">سم</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">🎂</div>
+                <div class="ex-info">
+                  <div class="ex-name">العمر</div>
+                </div>
+                <div class="ex-right">
+                  <div class="gram-wrapper">
+                    <input
+                      class="gram-input"
+                      type="number"
+                      value="${settings.age}"
+                      min="10"
+                      max="100"
+                      aria-label="العمر بالسنوات"
+                      onchange="updateSetting('age', this.value)"
+                    />
+                    <span class="gram-unit">سنة</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">👤</div>
+                <div class="ex-info">
+                  <div class="ex-name">الجنس</div>
+                </div>
+                <div class="ex-right">
+                  <select
+                    class="gram-input"
+                    style="padding: 8px 12px;"
+                    onchange="updateSetting('gender', this.value)"
+                  >
+                    <option value="male" ${settings.gender === 'male' ? 'selected' : ''}>ذكر</option>
+                    <option value="female" ${settings.gender === 'female' ? 'selected' : ''}>أنثى</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        html += `<p class="section-heading" aria-label="قسم الأهداف">الأهداف</p>`;
+        html += `
+          <div class="ex-list" role="list">
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">🎯</div>
+                <div class="ex-info">
+                  <div class="ex-name">الوزن المستهدف</div>
+                </div>
+                <div class="ex-right">
+                  <div class="gram-wrapper">
+                    <input
+                      class="gram-input"
+                      type="number"
+                      value="${settings.goalWeight}"
+                      min="30"
+                      max="300"
+                      step="0.5"
+                      aria-label="الوزن المستهدف بالكيلوغرام"
+                      onchange="updateSetting('goalWeight', this.value)"
+                    />
+                    <span class="gram-unit">كجم</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">🔥</div>
+                <div class="ex-info">
+                  <div class="ex-name">السعرات الحرارية المستهدفة</div>
+                </div>
+                <div class="ex-right">
+                  <div class="gram-wrapper">
+                    <input
+                      class="gram-input"
+                      type="number"
+                      value="${settings.goalCalories}"
+                      min="1000"
+                      max="5000"
+                      aria-label="السعرات الحرارية"
+                      onchange="updateSetting('goalCalories', this.value)"
+                    />
+                    <span class="gram-unit">سعر</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">🥩</div>
+                <div class="ex-info">
+                  <div class="ex-name">البروتين المستهدف</div>
+                </div>
+                <div class="ex-right">
+                  <div class="gram-wrapper">
+                    <input
+                      class="gram-input"
+                      type="number"
+                      value="${settings.goalProtein}"
+                      min="50"
+                      max="300"
+                      aria-label="البروتين بالغرام"
+                      onchange="updateSetting('goalProtein', this.value)"
+                    />
+                    <span class="gram-unit">غم</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">🍚</div>
+                <div class="ex-info">
+                  <div class="ex-name">الكاربوهدرات المستهدف</div>
+                </div>
+                <div class="ex-right">
+                  <div class="gram-wrapper">
+                    <input
+                      class="gram-input"
+                      type="number"
+                      value="${settings.goalCarbs}"
+                      min="50"
+                      max="500"
+                      aria-label="الكاربوهدرات بالغرام"
+                      onchange="updateSetting('goalCarbs', this.value)"
+                    />
+                    <span class="gram-unit">غم</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">🥑</div>
+                <div class="ex-info">
+                  <div class="ex-name">الدهون المستهدفة</div>
+                </div>
+                <div class="ex-right">
+                  <div class="gram-wrapper">
+                    <input
+                      class="gram-input"
+                      type="number"
+                      value="${settings.goalFat}"
+                      min="20"
+                      max="150"
+                      aria-label="الدهون بالغرام"
+                      onchange="updateSetting('goalFat', this.value)"
+                    />
+                    <span class="gram-unit">غم</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">🏃</div>
+                <div class="ex-info">
+                  <div class="ex-name">مستوى النشاط اليومي</div>
+                </div>
+                <div class="ex-right">
+                  <select
+                    class="gram-input"
+                    style="padding: 8px 12px;"
+                    onchange="updateSetting('activityLevel', this.value)"
+                  >
+                    <option value="sedentary" ${settings.activityLevel === 'sedentary' ? 'selected' : ''}>قليل الحركة</option>
+                    <option value="light" ${settings.activityLevel === 'light' ? 'selected' : ''}>نشاط خفيف</option>
+                    <option value="moderate" ${settings.activityLevel === 'moderate' ? 'selected' : ''}>نشاط متوسط</option>
+                    <option value="active" ${settings.activityLevel === 'active' ? 'selected' : ''}>نشاط عالي</option>
+                    <option value="very-active" ${settings.activityLevel === 'very-active' ? 'selected' : ''}>نشاط جداً عالي</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        html += `<p class="section-heading" aria-label="قسم إعدادات التطبيق">إعدادات التطبيق</p>`;
+        html += `
+          <div class="ex-list" role="list">
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">🌙</div>
+                <div class="ex-info">
+                  <div class="ex-name">الوضع الداكن</div>
+                </div>
+                <div class="ex-right">
+                  <label class="switch">
+                    <input type="checkbox" ${settings.darkMode ? 'checked' : ''} onchange="updateSetting('darkMode', this.checked)">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">🔔</div>
+                <div class="ex-info">
+                  <div class="ex-name">الإشعارات</div>
+                </div>
+                <div class="ex-right">
+                  <label class="switch">
+                    <input type="checkbox" ${settings.notifications ? 'checked' : ''} onchange="updateSetting('notifications', this.checked)">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="ex-card" role="listitem">
+              <div class="ex-header" style="cursor: default;">
+                <div class="ex-num-badge" aria-hidden="true">⏱️</div>
+                <div class="ex-info">
+                  <div class="ex-name">وقت الراحة الافتراضي</div>
+                </div>
+                <div class="ex-right">
+                  <div class="gram-wrapper">
+                    <input
+                      class="gram-input"
+                      type="number"
+                      value="${settings.restTimer}"
+                      min="10"
+                      max="300"
+                      aria-label="وقت الراحة بالثواني"
+                      onchange="updateSetting('restTimer', this.value)"
+                    />
+                    <span class="gram-unit">ث</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Calculate BMI for info
+        const bmi = (settings.weight / ((settings.height / 100) ** 2)).toFixed(1);
+        let bmiStatus = 'وزن طبيعي';
+        let bmiColor = '#10b981';
+        if (bmi < 18.5) { bmiStatus = 'نقص في الوزن'; bmiColor = '#f59e0b'; }
+        else if (bmi >= 25 && bmi < 30) { bmiStatus = 'وزن زائد'; bmiColor = '#f59e0b'; }
+        else if (bmi >= 30) { bmiStatus = 'سمنة'; bmiColor = '#ef4444'; }
+
+        html += `
+          <div class="daily-summary-card fade-in" role="region" aria-label="ملخص الجسم">
+            <div class="summary-top">
+              <div class="summary-metrics">
+                <div class="metric-item">
+                  <span class="m-val" style="color: ${bmiColor};">${bmi}</span>
+                  <span class="m-lbl">مؤشر كتلة الجسم (BMI)</span>
+                </div>
+                <div class="metric-divider"></div>
+                <div class="metric-item">
+                  <span class="m-val">${bmiStatus}</span>
+                  <span class="m-lbl">الحالة</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
       // ─────────────────────────────────────────────────
       // FOOD MODAL
       // ─────────────────────────────────────────────────
@@ -3327,6 +3741,47 @@
     window.toggleExercise = function(exName) { openExercises[exName] = !openExercises[exName]; renderApp(); };
     window.playExerciseVideo = function(exName) { videoPlaying[exName] = true; renderApp(); };
     window.toggleMeal = function(mealKey) { openMeals[mealKey] = !openMeals[mealKey]; renderApp(); };
+    
+    // Settings functions
+    window.updateSetting = function(key, value) {
+      // Handle number values
+      if (['weight', 'height', 'age', 'goalWeight', 'goalCalories', 'goalProtein', 'goalCarbs', 'goalFat', 'restTimer'].includes(key)) {
+        value = parseFloat(value);
+      }
+      settings[key] = value;
+      saveSettings();
+      // Update targets if needed
+      updateTargetsFromSettings();
+      // Apply dark mode if needed
+      if (key === 'darkMode') {
+        applyDarkMode();
+      }
+      renderApp();
+    };
+    
+    function saveSettings() {
+      try {
+        localStorage.setItem('workout_settings', JSON.stringify(settings));
+      } catch(e) {}
+    }
+    
+    function updateTargetsFromSettings() {
+      TARGETS.cal = settings.goalCalories;
+      TARGETS.p = settings.goalProtein;
+      TARGETS.c = settings.goalCarbs;
+      TARGETS.f = settings.goalFat;
+    }
+    
+    // Apply dark mode
+    function applyDarkMode() {
+      if (settings.darkMode) {
+        document.body.style.backgroundColor = '#0f172a';
+        document.body.style.color = '#f8fafc';
+      } else {
+        document.body.style.backgroundColor = '';
+        document.body.style.color = '';
+      }
+    }
 
     // ─── Food Modal ───────────────────────────────────────
     window.openFoodModal = function(mealKey, mode, idx) {
