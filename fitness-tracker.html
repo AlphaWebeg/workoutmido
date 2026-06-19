@@ -623,6 +623,56 @@
       border: none;
     }
 
+    .video-container.video-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 200px;
+      padding-bottom: 0;
+      height: auto;
+      cursor: pointer;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      transition: background var(--t-base);
+    }
+
+    .video-container.video-placeholder:hover {
+      background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+    }
+
+    .video-play-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+      transition: transform var(--t-base), box-shadow var(--t-base);
+    }
+
+    .video-container.video-placeholder:hover .video-play-btn {
+      transform: scale(1.05);
+      box-shadow: 0 6px 24px rgba(99, 102, 241, 0.5);
+    }
+
+    .video-play-btn svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+      margin-right: -3px;
+    }
+
+    .video-play-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+
     .ex-detail-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1877,7 +1927,7 @@
       "Push-up عادي": {
         gif: "assets/Push-up_عادي.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/PushUps.gif/220px-PushUps.gif",
-        video: "https://www.youtube.com/embed/IODxDxX7oi4?start=0&end=15&autoplay=1&mute=1&controls=1&rel=0",
+        video: "https://www.youtube.com/embed/IODxDxX7oi4?start=0&end=15&controls=1&rel=0",
         type: "push", icon: "💪",
         muscles: "صدر • ترايسبس • كتف أمامي",
         steps: ["ابدأ في وضع البلانك: يديك أعرض قليلاً من الكتفين", "انزل ببطء حتى تقترب الصدر من الأرضية", "ادفع للأعلى مع الزفير"],
@@ -1886,162 +1936,162 @@
       "Chest Fly": {
         gif: "assets/Chest_Fly.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Cable_fly.gif/220px-Cable_fly.gif",
-        video: "https://www.youtube.com/embed/eozdVDA78K0?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/eozdVDA78K0?controls=1&rel=0"
       },
       "Lat Pulldown": {
         gif: "assets/Lat_Pulldown.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Lat-pulldown.gif/220px-Lat-pulldown.gif",
-        video: "https://www.youtube.com/embed/CAwf7n6Luuc?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/CAwf7n6Luuc?controls=1&rel=0"
       },
       "Straight Arm Pulldown": {
         gif: "assets/Straight_Arm_Pulldown.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Cable_pushdown_%28straight_bar%29_2.gif/220px-Cable_pushdown_%28straight_bar%29_2.gif",
-        video: "https://www.youtube.com/embed/TD3AoH3moig?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/TD3AoH3moig?controls=1&rel=0"
       },
       "Seated Row": {
         gif: "assets/Seated_Row.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Seated-cable-rows-2.gif/220px-Seated-cable-rows-2.gif",
-        video: "https://www.youtube.com/embed/GZbfZ033f74?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/GZbfZ033f74?controls=1&rel=0"
       },
       "Bicep Curl": {
         gif: "assets/Bicep_Curl.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Dumbbell_Bicep_Curl_-_hollow_back.gif/220px-Dumbbell_Bicep_Curl_-_hollow_back.gif",
-        video: "https://www.youtube.com/embed/ykJmrZ5v0Oo?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/ykJmrZ5v0Oo?controls=1&rel=0"
       },
       "Reverse Curl": {
         gif: "assets/Reverse_Curl.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Reverse_curl.gif/220px-Reverse_curl.gif",
-        video: "https://www.youtube.com/embed/nkxNnfM3cGI?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/nkxNnfM3cGI?controls=1&rel=0"
       },
       "Incline Curl": {
         gif: "assets/Incline_Curl.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Incline-dumbbell-curl.gif/220px-Incline-dumbbell-curl.gif",
-        video: "https://www.youtube.com/embed/soxrZlIl35U?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/soxrZlIl35U?controls=1&rel=0"
       },
       "Tricep Pushdown": {
         gif: "assets/Tricep_Pushdown.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Pushdown.gif/220px-Pushdown.gif",
-        video: "https://www.youtube.com/embed/2-LAMcpzODU?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/2-LAMcpzODU?controls=1&rel=0"
       },
       "Squat": {
         gif: "assets/Squat.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/SquatLift.gif/220px-SquatLift.gif",
-        video: "https://www.youtube.com/embed/aclHkVaku9U?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/aclHkVaku9U?controls=1&rel=0"
       },
       "Romanian Deadlift": {
         gif: "assets/Romanian_Deadlift.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Romanian_deadlift.gif/220px-Romanian_deadlift.gif",
-        video: "https://www.youtube.com/embed/JCXUYuzwNrM?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/JCXUYuzwNrM?controls=1&rel=0"
       },
       "Lunge": {
         gif: "assets/Lunge.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Lunge.gif/220px-Lunge.gif",
-        video: "https://www.youtube.com/embed/QOVaHwm-Q6U?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/QOVaHwm-Q6U?controls=1&rel=0"
       },
       "Leg Curl": {
         gif: "assets/Leg_Curl.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Lying-Leg-Curls.gif/220px-Lying-Leg-Curls.gif",
-        video: "https://www.youtube.com/embed/1Tq3QdYUuHs?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/1Tq3QdYUuHs?controls=1&rel=0"
       },
       "Close Stance Squat": {
         gif: "assets/Squat.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/SquatLift.gif/220px-SquatLift.gif",
-        video: "https://www.youtube.com/embed/UXJrBgI2RxA?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/UXJrBgI2RxA?controls=1&rel=0"
       },
       "Glute Bridge": {
         gif: "assets/Glute_Bridge.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Glute-bridge.gif/220px-Glute-bridge.gif",
-        video: "https://www.youtube.com/embed/OUgsJ8-Vi0E?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/OUgsJ8-Vi0E?controls=1&rel=0"
       },
       "Calf Raise": {
         gif: "assets/Calf_Raise.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Standing_calf_raise.gif/220px-Standing_calf_raise.gif",
-        video: "https://www.youtube.com/embed/gwLzBJYoWlI?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/gwLzBJYoWlI?controls=1&rel=0"
       },
       "Plank": {
         gif: "assets/Plank.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Plank_exercise.gif/220px-Plank_exercise.gif",
-        video: "https://www.youtube.com/embed/pvIjsG5Svck?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/pvIjsG5Svck?controls=1&rel=0"
       },
       "Pike Push-up": {
         gif: "assets/Pike_Push-up.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Pike-Push-Up.gif/220px-Pike-Push-Up.gif",
-        video: "https://www.youtube.com/embed/sposDXWEB0A?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/sposDXWEB0A?controls=1&rel=0"
       },
       "Lateral Raise": {
         gif: "assets/Lateral_Raise.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Lateral-Raises.gif/220px-Lateral-Raises.gif",
-        video: "https://www.youtube.com/embed/3VcKaXpzqRo?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/3VcKaXpzqRo?controls=1&rel=0"
       },
       "Face Pull": {
         gif: "assets/Face_Pull.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Face-pull.gif/220px-Face-pull.gif",
-        video: "https://www.youtube.com/embed/rep-qVOkqgk?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/rep-qVOkqgk?controls=1&rel=0"
       },
       "Serratus Punch": {
         gif: "assets/Push-up_عادي.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/PushUps.gif/220px-PushUps.gif",
-        video: "https://www.youtube.com/embed/H8HMOhcOsKU?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/H8HMOhcOsKU?controls=1&rel=0"
       },
       "Single Arm Row": {
         gif: "assets/Seated_Row.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Seated-cable-rows-2.gif/220px-Seated-cable-rows-2.gif",
-        video: "https://www.youtube.com/embed/pYcpY20QaE8?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/pYcpY20QaE8?controls=1&rel=0"
       },
       "Pull-over": {
         gif: "assets/Pullover.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Dumbbell-pullover.gif/220px-Dumbbell-pullover.gif",
-        video: "https://www.youtube.com/embed/FK4rHfEqSB0?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/FK4rHfEqSB0?controls=1&rel=0"
       },
       "Reverse Fly": {
         gif: "assets/Reverse_Fly.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Reverse-Fly.gif/220px-Reverse-Fly.gif",
-        video: "https://www.youtube.com/embed/ttvANqfNQSY?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/ttvANqfNQSY?controls=1&rel=0"
       },
       "Overhead Tricep Extension": {
         gif: "assets/Overhead_Tricep_Extension.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Overhead-Tricep-Extension.gif/220px-Overhead-Tricep-Extension.gif",
-        video: "https://www.youtube.com/embed/YbX7Wd8jQ-Q?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/YbX7Wd8jQ-Q?controls=1&rel=0"
       },
       "Hammer Curl": {
         gif: "assets/Hammer_Curl.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Hammer-Curls.gif/220px-Hammer-Curls.gif",
-        video: "https://www.youtube.com/embed/zC3nLlEvin4?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/zC3nLlEvin4?controls=1&rel=0"
       },
       "Sumo Squat": {
         gif: "assets/Sumo_Squat.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Sumo-Squat.gif/220px-Sumo-Squat.gif",
-        video: "https://www.youtube.com/embed/QKKN9oMPHRU?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/QKKN9oMPHRU?controls=1&rel=0"
       },
       "Single Leg Deadlift": {
         gif: "assets/Romanian_Deadlift.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Romanian_deadlift.gif/220px-Romanian_deadlift.gif",
-        video: "https://www.youtube.com/embed/TGTqKFaKaT8?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/TGTqKFaKaT8?controls=1&rel=0"
       },
       "Step Up على كرسي": {
         gif: "assets/Step_Up.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Step-ups.gif/220px-Step-ups.gif",
-        video: "https://www.youtube.com/embed/dQqApCGd5Ss?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/dQqApCGd5Ss?controls=1&rel=0"
       },
       "Donkey Kick": {
         gif: "assets/Donkey_Kick.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Donkey-Kicks.gif/220px-Donkey-Kicks.gif",
-        video: "https://www.youtube.com/embed/SJ1Xuz9D-ZQ?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/SJ1Xuz9D-ZQ?controls=1&rel=0"
       },
       "Leg Raise": {
         gif: "assets/Leg_Raise.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Leg-Raise.gif/220px-Leg-Raise.gif",
-        video: "https://www.youtube.com/embed/l4kQd9eWclE?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/l4kQd9eWclE?controls=1&rel=0"
       },
       "Mountain Climber": {
         gif: "assets/Mountain_Climber.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Mountain-Climbers.gif/220px-Mountain-Climbers.gif",
-        video: "https://www.youtube.com/embed/nmwgirgXLYM?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/nmwgirgXLYM?controls=1&rel=0"
       },
       "Pallof Press": {
         gif: "assets/Push-up_عادي.gif",
         online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/PushUps.gif/220px-PushUps.gif",
-        video: "https://www.youtube.com/embed/AH_QZLm_0-s?autoplay=1&mute=1&controls=1&rel=0"
+        video: "https://www.youtube.com/embed/AH_QZLm_0-s?controls=1&rel=0"
       }
     };
 
@@ -2139,6 +2189,18 @@
         { name: "عسل أسود",          icon: "🍯", per100g: { cal: 290, p: 0,    c: 75,  f: 0   } },
         { name: "حلاوة طحينية",      icon: "🧈", per100g: { cal: 516, p: 12,   c: 54,  f: 28  } },
         { name: "مربى تين",          icon: "🏺", per100g: { cal: 270, p: 0.7,  c: 68,  f: 0.1 } },
+        { name: "روز بلبن",          icon: "🥣", keywords: ["أرز باللبن"], per100g: { cal: 135, p: 3,    c: 25,  f: 2.5 } },
+        { name: "ممبار",             icon: "🥒", keywords: ["محشي ممبار"], per100g: { cal: 110, p: 3,    c: 15,  f: 4   } },
+        { name: "محشي فلفل",         icon: "🫑", per100g: { cal: 90,  p: 2,    c: 13,  f: 3.5 } },
+        { name: "محشي ملفوف",        icon: "🥬", per100g: { cal: 95,  p: 2.5,  c: 14,  f: 3.5 } },
+        { name: "محشي بطاطس",        icon: "🥔", per100g: { cal: 100, p: 2,    c: 15,  f: 3.5 } },
+        { name: "فتة باللحمة",       icon: "🍲", per100g: { cal: 180, p: 8,    c: 22,  f: 7   } },
+        { name: "فتة بالفراخ",        icon: "🍲", per100g: { cal: 160, p: 10,   c: 20,  f: 5   } },
+        { name: "بسبوسة",            icon: "🍰", keywords: ["حلويات"], per100g: { cal: 400, p: 5,    c: 55,  f: 18  } },
+        { name: "كنافة",             icon: "🧁", keywords: ["حلويات"], per100g: { cal: 350, p: 6,    c: 45,  f: 16  } },
+        { name: "مهلبية",            icon: "🥣", keywords: ["حلويات"], per100g: { cal: 120, p: 3,    c: 20,  f: 3   } },
+        { name: "لقمة القاضي",       icon: "🍩", keywords: ["عوامة", "حلويات"], per100g: { cal: 380, p: 4,    c: 50,  f: 18  } },
+        { name: "بلح الشام",         icon: "🍩", keywords: ["حلويات"], per100g: { cal: 350, p: 4,    c: 48,  f: 16  } },
       ],
       protein: [
         { name: "صدر فراخ مسلوق",   icon: "🍗", per100g: { cal: 110, p: 23,  c: 0,   f: 2   } },
@@ -2175,6 +2237,43 @@
         { name: "فول بالزبدة",       icon: "🫘", per100g: { cal: 140, p: 5.5, c: 13,  f: 7   } },
         { name: "طعمية (فلافل)",     icon: "🧆", per100g: { cal: 330, p: 13,  c: 32,  f: 17  } },
         { name: "بابا غنوج",         icon: "🍆", per100g: { cal: 120, p: 2,   c: 8,   f: 9   } },
+        { name: "ملوخية بالفراخ",    icon: "🌿", keywords: ["ملوخية"], per100g: { cal: 75,  p: 8,   c: 5,   f: 3   } },
+        { name: "بامية باللحمة",     icon: "🥘", keywords: ["بامية"], per100g: { cal: 95,  p: 6,   c: 8,   f: 4   } },
+        { name: "كوارع (مخ)",        icon: "🥘", keywords: ["كوارع", "مخ"], per100g: { cal: 180, p: 12,  c: 3,   f: 14  } },
+        { name: "لسان قصاص",         icon: "🍲", per100g: { cal: 100, p: 5,   c: 12,  f: 4   } },
+        { name: "حمام محشي",         icon: "🍗", per100g: { cal: 220, p: 18,  c: 2,   f: 15  } },
+        { name: "طرب (لحمة مشوية)",  icon: "🥩", per100g: { cal: 250, p: 22,  c: 1,   f: 18  } },
+        { name: "حمص بالطحينة",      icon: "🫘", keywords: ["حمص"], per100g: { cal: 170, p: 8,   c: 14,  f: 10  } },
+        { name: "رنجة مدخنة",        icon: "🐟", per100g: { cal: 210, p: 18,  c: 0,   f: 15  } },
+      ],
+      street: [
+        { name: "استربس فراخ",       icon: "🍗", keywords: ["ستربس", "strips", "كنتاكي", "بروست"], per100g: { cal: 250, p: 18,  c: 15,  f: 14  } },
+        { name: "فراخ بروست",        icon: "🍗", keywords: ["بروستد", "كنتاكي"], per100g: { cal: 220, p: 20,  c: 8,   f: 12  } },
+        { name: "برجر مصري",         icon: "🍔", keywords: ["برجر", "burger"], per100g: { cal: 280, p: 14,  c: 25,  f: 14  } },
+        { name: "حواوشي",            icon: "🥙", keywords: ["hawawshi"], per100g: { cal: 290, p: 12,  c: 22,  f: 17  } },
+        { name: "كفتة ساندوتش",      icon: "🥪", keywords: ["كفتة"], per100g: { cal: 250, p: 14,  c: 20,  f: 13  } },
+        { name: "ساندوتش بطاطس",     icon: "🥪", keywords: ["بطاطس"], per100g: { cal: 270, p: 5,   c: 35,  f: 12  } },
+        { name: "فول وطعمية",        icon: "🥙", keywords: ["فول طعمية", "ساندوتش"], per100g: { cal: 180, p: 8,   c: 22,  f: 7   } },
+        { name: "ساندوتش طعمية",     icon: "🥙", keywords: ["طعمية ساندوتش"], per100g: { cal: 200, p: 7,   c: 24,  f: 9   } },
+        { name: "ساندوتش فول",       icon: "🥙", keywords: ["فول ساندوتش"], per100g: { cal: 160, p: 7,   c: 20,  f: 5   } },
+        { name: "شاورما فراخ ساندوتش", icon: "🌯", keywords: ["شاورما"], per100g: { cal: 190, p: 16,  c: 18,  f: 8   } },
+        { name: "شاورما لحمة ساندوتش", icon: "🌯", keywords: ["شاورما"], per100g: { cal: 240, p: 18,  c: 16,  f: 14  } },
+        { name: "كبدة إسكندراني ساندوتش", icon: "🥪", keywords: ["كبدة", "إسكندراني"], per100g: { cal: 210, p: 15,  c: 18,  f: 10  } },
+        { name: "وش إسكندراني",      icon: "🥪", keywords: ["إسكندراني"], per100g: { cal: 200, p: 8,   c: 22,  f: 9   } },
+        { name: "سمبوسك لحمة",       icon: "🥟", keywords: ["سمبوسة"], per100g: { cal: 300, p: 10,  c: 28,  f: 16  } },
+        { name: "سمبوسك جبنة",       icon: "🥟", keywords: ["سمبوسة"], per100g: { cal: 280, p: 8,   c: 26,  f: 15  } },
+        { name: "فطير مشلتت",        icon: "🫓", keywords: ["فطير"], per100g: { cal: 350, p: 8,   c: 42,  f: 16  } },
+        { name: "فطير بالجبنة",      icon: "🫓", keywords: ["فطير"], per100g: { cal: 320, p: 10,  c: 38,  f: 14  } },
+        { name: "فطير بالعسل",       icon: "🫓", keywords: ["فطير"], per100g: { cal: 340, p: 7,   c: 48,  f: 12  } },
+        { name: "سجق مصري",          icon: "🌭", keywords: ["سجق"], per100g: { cal: 280, p: 12,  c: 5,   f: 24  } },
+        { name: "هوت دوج مصري",      icon: "🌭", keywords: ["هوت دوج"], per100g: { cal: 260, p: 10,  c: 22,  f: 15  } },
+        { name: "بيتزا مصري",        icon: "🍕", keywords: ["بيتزا"], per100g: { cal: 240, p: 10,  c: 28,  f: 10  } },
+        { name: "مكرونة بشاميل ساندوتش", icon: "🥪", per100g: { cal: 230, p: 9,   c: 24,  f: 11  } },
+        { name: "كشري (طبق كامل)",   icon: "🍲", keywords: ["كشري"], per100g: { cal: 130, p: 4.5, c: 24,  f: 2   } },
+        { name: "فراخ مشوية (وجبة شارع)", icon: "🍗", per100g: { cal: 175, p: 22,  c: 2,   f: 8   } },
+        { name: "سمك بلطي مشوي (وجبة شارع)", icon: "🐟", per100g: { cal: 120, p: 17,  c: 0,   f: 5   } },
+        { name: "بطاطس محمرة (كبيرة)", icon: "🍟", keywords: ["فرايز"], per100g: { cal: 312, p: 3.4, c: 41,  f: 15  } },
+        { name: "أرز بالخلطة (كشري)", icon: "🍚", per100g: { cal: 145, p: 3.5, c: 28,  f: 2   } },
       ],
       fat: [
         { name: "زيت ذرة",           icon: "🫙", per100g: { cal: 884, p: 0,   c: 0,   f: 100 } },
@@ -2281,7 +2380,7 @@
     let activeDay = DAYS[new Date().getDay()];
     let currentTab = "workout";
     const openExercises = {};
-    const activeMediaTabs = {};
+    const videoPlaying = {};
     const openMeals = { breakfast: true, preworkout: true, postworkout: true, lunch: true, dinner: true };
     let swapTarget = null; // kept for compat
 
@@ -2518,6 +2617,37 @@
 
     function pct(v, t) { return Math.min(100, Math.round((v / t) * 100)); }
 
+    function getVideoEmbedUrl(url) {
+      if (!url) return '';
+      return url.replace(/[?&]autoplay=1/g, '').replace(/[?&]mute=1/g, '').replace(/\?&/, '?').replace(/&&/g, '&').replace(/\?$/, '');
+    }
+
+    function foodSearchText(item) {
+      return [item.name, ...(item.keywords || [])].join(' ').toLowerCase();
+    }
+
+    function findLocalFoods(query) {
+      const searchTerms = query.toLowerCase().split(/\s+/).filter(Boolean);
+      const results = [];
+      Object.entries(EGYPTIAN_FOODS).forEach(([cat, list]) => {
+        list.forEach(item => {
+          const text = foodSearchText(item);
+          if (searchTerms.every(term => text.includes(term))) {
+            results.push({
+              name: item.name,
+              icon: item.icon || '🍲',
+              cal: item.per100g.cal,
+              p: item.per100g.p,
+              c: item.per100g.c,
+              f: item.per100g.f,
+              isLocal: true
+            });
+          }
+        });
+      });
+      return results;
+    }
+
     function renderSearchResultsHtml(results, query, searching, mKey) {
       if (searching) return '';
       if (results && results.length > 0) {
@@ -2527,7 +2657,7 @@
               <button class="option-btn" onclick="addSearchedFood('${mKey}', ${i})">
                 <div class="option-icon">${r.icon || '🔎'}</div>
                 <div class="option-info">
-                  <div class="option-name">${r.name}</div>
+                  <div class="option-name">${r.name}${r.isLocal ? ' <span style="font-size:0.7rem;color:#6366f1;font-weight:700">• محلي</span>' : ''}</div>
                   <div class="option-macros">${r.cal} kcal | بروتين ${r.p}غ | كارب ${r.c}غ | دهون ${r.f}غ — لكل 100غ</div>
                 </div>
               </button>
@@ -2709,48 +2839,35 @@
           exercises.forEach((ex, i) => {
             const isOpen = openExercises[ex.name] || false;
             const media = EXERCISE_MEDIA[ex.name];
-            const activeTab = activeMediaTabs[ex.name] || "gif";
 
             let mediaPanel = "";
             if (isOpen && media) {
               let mediaContent = "";
-              if (activeTab === "gif") {
-                const gifSrc = media.gif || media.online_gif;
-                if (gifSrc) {
+              if (media.video) {
+                const safeName = ex.name.replace(/'/g, "\\'");
+                const embedUrl = getVideoEmbedUrl(media.video);
+                if (videoPlaying[ex.name]) {
                   mediaContent = `
-                    <div class="gif-container">
-                      <img
-                        src="${gifSrc}"
-                        alt="حركة تمرين ${ex.name}"
-                        data-fallback="${media.online_gif || ''}"
-                        onerror="handleImageError(this)"
+                    <div class="video-container">
+                      <iframe
+                        src="${embedUrl}"
+                        title="فيديو تمرين ${ex.name}"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
                         loading="lazy"
-                        referrerpolicy="no-referrer"
-                      />
+                      ></iframe>
                     </div>
                   `;
                 } else {
                   mediaContent = `
-                    <div class="gif-container">
-                      <div class="gif-placeholder">
-                        <div class="gif-placeholder-icon" aria-hidden="true">🏋️</div>
-                        <p>شاهد الفيديو للتعرف على الحركة</p>
-                      </div>
+                    <div class="video-container video-placeholder" onclick="playExerciseVideo('${safeName}')" role="button" tabindex="0" aria-label="تشغيل فيديو ${ex.name}">
+                      <button class="video-play-btn" type="button" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="10,8 16,12 10,16"/></svg>
+                      </button>
+                      <span class="video-play-label">اضغط لتشغيل الفيديو</span>
                     </div>
                   `;
                 }
-              } else {
-                mediaContent = `
-                  <div class="video-container">
-                    <iframe
-                      src="${media.video}"
-                      title="فيديو تمرين ${ex.name}"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
-                      loading="lazy"
-                    ></iframe>
-                  </div>
-                `;
               }
 
               const currentProgress = (workoutProgress[dateKey] && workoutProgress[dateKey][ex.name]) || Array(ex.sets).fill(false);
@@ -2780,24 +2897,6 @@
 
               mediaPanel = `
                 <div class="ex-media-panel">
-                  <div class="media-tab-bar" role="tablist" aria-label="نوع الوسائط">
-                    <button
-                      class="media-tab-btn ${activeTab === 'gif' ? 'active' : ''}"
-                      onclick="setMediaTab('${ex.name}', 'gif')"
-                      aria-selected="${activeTab === 'gif'}"
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
-                      صورة متحركة
-                    </button>
-                    <button
-                      class="media-tab-btn ${activeTab === 'video' ? 'active' : ''}"
-                      onclick="setMediaTab('${ex.name}', 'video')"
-                      aria-selected="${activeTab === 'video'}"
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
-                      فيديو يوتيوب
-                    </button>
-                  </div>
                   <div class="media-content">
                     ${mediaContent}
                     <div class="ex-detail-grid">
@@ -3008,6 +3107,7 @@
         const cats = [
           { key:'protein', label:'بروتين' },
           { key:'carb',    label:'كارب' },
+          { key:'street',  label:'أكل شارع' },
           { key:'veg',     label:'خضار' },
           { key:'fat',     label:'دهون' },
           { key:'fruit',   label:'فاكهة' },
@@ -3019,7 +3119,8 @@
         // ─── mode: swap (like before but richer) ───
         if (fm.mode === 'swap') {
           const item = mealsState[activeDay][mKey][fm.idx];
-          const opts = item.category === 'carb' ? EGYPTIAN_FOODS.carb : EGYPTIAN_FOODS.protein;
+          const catFoods = EGYPTIAN_FOODS[item.category] || [];
+          const opts = catFoods.length > 0 ? catFoods : Object.values(EGYPTIAN_FOODS).flat();
           modalBody = `
             <div class="modal-title">استبدال "${item.name}"</div>
             <div class="modal-subtitle">اختار البديل — الأكل المصري المتاح</div>
@@ -3220,7 +3321,7 @@
     window.setActiveDay = function(day) { activeDay = day; renderApp(); };
     window.setTab = function(tab) { currentTab = tab; renderApp(); };
     window.toggleExercise = function(exName) { openExercises[exName] = !openExercises[exName]; renderApp(); };
-    window.setMediaTab = function(exName, tabType) { activeMediaTabs[exName] = tabType; renderApp(); };
+    window.playExerciseVideo = function(exName) { videoPlaying[exName] = true; renderApp(); };
     window.toggleMeal = function(mealKey) { openMeals[mealKey] = !openMeals[mealKey]; renderApp(); };
 
     // ─── Food Modal ───────────────────────────────────────
@@ -3349,29 +3450,12 @@
       if (!foodModal) return;
       
       // 1. Search local EGYPTIAN_FOODS database first
-      const localResults = [];
-      const searchTerms = query.toLowerCase().split(/\s+/).filter(Boolean);
-      
-      Object.entries(EGYPTIAN_FOODS).forEach(([cat, list]) => {
-        list.forEach(item => {
-          const match = searchTerms.every(term => item.name.toLowerCase().includes(term));
-          if (match) {
-            localResults.push({
-              name: item.name,
-              icon: item.icon || '🍲',
-              cal: item.per100g.cal,
-              p: item.per100g.p,
-              c: item.per100g.c,
-              f: item.per100g.f,
-              isLocal: true
-            });
-          }
-        });
-      });
+      const localResults = findLocalFoods(query);
       
       let onlineResults = [];
       try {
-        const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(query)}&search_simple=1&action=process&json=1&page_size=10&lc=ar`;
+        const apiQuery = query;
+        const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(apiQuery)}&search_simple=1&action=process&json=1&page_size=10&lc=ar&countries_tags_en=Egypt`;
         const res = await fetch(url);
         const data = await res.json();
         onlineResults = (data.products || []).filter(p =>
@@ -3436,27 +3520,11 @@
     };
     window.handleSwap = function(mealKey, idx, optName) {
       const item = mealsState[activeDay][mealKey][idx];
-      const options = item.category === "carb" ? CARB_OPTIONS : PROTEIN_OPTIONS;
-      const opt = options.find(o => o.name === optName);
+      const allFoods = Object.values(EGYPTIAN_FOODS).flat();
+      const opt = allFoods.find(o => o.name === optName);
       if (opt) { item.name = opt.name; item.per100g = { ...opt.per100g }; saveMeals(); }
       swapTarget = null;
       renderApp();
-    };
-    window.handleImageError = function(img) {
-      const fallback = img.getAttribute('data-fallback');
-      const triedFallback = img.getAttribute('data-tried-fallback');
-      if (fallback && !triedFallback) {
-        img.setAttribute('data-tried-fallback', 'true');
-        img.src = fallback;
-        return;
-      }
-      const wrap = img.closest('.gif-container') || img.parentElement;
-      wrap.innerHTML = `
-        <div class="gif-placeholder">
-          <div class="gif-placeholder-icon">🏋️</div>
-          <p>شاهد الفيديو للتعرف على الحركة</p>
-        </div>
-      `;
     };
 
     // Keyboard accessibility for cards

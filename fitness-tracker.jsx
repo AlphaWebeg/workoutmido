@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // ============================================================
 // EXERCISE MEDIA — GIF from Wikimedia / public domain + YouTube short
@@ -7,7 +7,7 @@ const EXERCISE_MEDIA = {
   "Push-up عادي": {
     gif: "assets/Push-up_عادي.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/PushUps.gif/220px-PushUps.gif",
-    video: "https://www.youtube.com/embed/IODxDxX7oi4?start=0&end=15&autoplay=1&mute=1&controls=1&rel=0",
+    video: "https://www.youtube.com/embed/IODxDxX7oi4?start=0&end=15&controls=1&rel=0",
     type: "push",
     icon: "💪",
     muscles: "صدر • ترايسبس • كتف أمامي",
@@ -17,162 +17,162 @@ const EXERCISE_MEDIA = {
   "Chest Fly": {
     gif: "assets/Chest_Fly.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Cable_fly.gif/220px-Cable_fly.gif",
-    video: "https://www.youtube.com/embed/eozdVDA78K0?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/eozdVDA78K0?controls=1&rel=0"
   },
   "Lat Pulldown": {
     gif: "assets/Lat_Pulldown.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Lat-pulldown.gif/220px-Lat-pulldown.gif",
-    video: "https://www.youtube.com/embed/CAwf7n6Luuc?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/CAwf7n6Luuc?controls=1&rel=0"
   },
   "Straight Arm Pulldown": {
     gif: "assets/Straight_Arm_Pulldown.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Cable_pushdown_%28straight_bar%29_2.gif/220px-Cable_pushdown_%28straight_bar%29_2.gif",
-    video: "https://www.youtube.com/embed/TD3AoH3moig?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/TD3AoH3moig?controls=1&rel=0"
   },
   "Seated Row": {
     gif: "assets/Seated_Row.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Seated-cable-rows-2.gif/220px-Seated-cable-rows-2.gif",
-    video: "https://www.youtube.com/embed/GZbfZ033f74?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/GZbfZ033f74?controls=1&rel=0"
   },
   "Bicep Curl": {
     gif: "assets/Bicep_Curl.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Dumbbell_Bicep_Curl_-_hollow_back.gif/220px-Dumbbell_Bicep_Curl_-_hollow_back.gif",
-    video: "https://www.youtube.com/embed/ykJmrZ5v0Oo?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/ykJmrZ5v0Oo?controls=1&rel=0"
   },
   "Reverse Curl": {
     gif: "assets/Reverse_Curl.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Reverse_curl.gif/220px-Reverse_curl.gif",
-    video: "https://www.youtube.com/embed/nkxNnfM3cGI?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/nkxNnfM3cGI?controls=1&rel=0"
   },
   "Incline Curl": {
     gif: "assets/Incline_Curl.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Incline-dumbbell-curl.gif/220px-Incline-dumbbell-curl.gif",
-    video: "https://www.youtube.com/embed/soxrZlIl35U?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/soxrZlIl35U?controls=1&rel=0"
   },
   "Tricep Pushdown": {
     gif: "assets/Tricep_Pushdown.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Pushdown.gif/220px-Pushdown.gif",
-    video: "https://www.youtube.com/embed/2-LAMcpzODU?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/2-LAMcpzODU?controls=1&rel=0"
   },
   "Squat": {
     gif: "assets/Squat.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/SquatLift.gif/220px-SquatLift.gif",
-    video: "https://www.youtube.com/embed/aclHkVaku9U?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/aclHkVaku9U?controls=1&rel=0"
   },
   "Romanian Deadlift": {
     gif: "assets/Romanian_Deadlift.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Romanian_deadlift.gif/220px-Romanian_deadlift.gif",
-    video: "https://www.youtube.com/embed/JCXUYuzwNrM?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/JCXUYuzwNrM?controls=1&rel=0"
   },
   "Lunge": {
     gif: "assets/Lunge.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Lunge.gif/220px-Lunge.gif",
-    video: "https://www.youtube.com/embed/QOVaHwm-Q6U?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/QOVaHwm-Q6U?controls=1&rel=0"
   },
   "Leg Curl": {
     gif: "assets/Leg_Curl.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Lying-Leg-Curls.gif/220px-Lying-Leg-Curls.gif",
-    video: "https://www.youtube.com/embed/1Tq3QdYUuHs?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/1Tq3QdYUuHs?controls=1&rel=0"
   },
   "Close Stance Squat": {
     gif: "assets/Squat.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/SquatLift.gif/220px-SquatLift.gif",
-    video: "https://www.youtube.com/embed/UXJrBgI2RxA?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/UXJrBgI2RxA?controls=1&rel=0"
   },
   "Glute Bridge": {
     gif: "assets/Glute_Bridge.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Glute-bridge.gif/220px-Glute-bridge.gif",
-    video: "https://www.youtube.com/embed/OUgsJ8-Vi0E?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/OUgsJ8-Vi0E?controls=1&rel=0"
   },
   "Calf Raise": {
     gif: "assets/Calf_Raise.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Standing_calf_raise.gif/220px-Standing_calf_raise.gif",
-    video: "https://www.youtube.com/embed/gwLzBJYoWlI?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/gwLzBJYoWlI?controls=1&rel=0"
   },
   "Plank": {
     gif: "assets/Plank.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Plank_exercise.gif/220px-Plank_exercise.gif",
-    video: "https://www.youtube.com/embed/pvIjsG5Svck?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/pvIjsG5Svck?controls=1&rel=0"
   },
   "Pike Push-up": {
     gif: "assets/Pike_Push-up.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Pike-Push-Up.gif/220px-Pike-Push-Up.gif",
-    video: "https://www.youtube.com/embed/sposDXWEB0A?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/sposDXWEB0A?controls=1&rel=0"
   },
   "Lateral Raise": {
     gif: "assets/Lateral_Raise.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Lateral-Raises.gif/220px-Lateral-Raises.gif",
-    video: "https://www.youtube.com/embed/3VcKaXpzqRo?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/3VcKaXpzqRo?controls=1&rel=0"
   },
   "Face Pull": {
     gif: "assets/Face_Pull.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Face-pull.gif/220px-Face-pull.gif",
-    video: "https://www.youtube.com/embed/rep-qVOkqgk?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/rep-qVOkqgk?controls=1&rel=0"
   },
   "Serratus Punch": {
     gif: "assets/Push-up_عادي.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/PushUps.gif/220px-PushUps.gif",
-    video: "https://www.youtube.com/embed/H8HMOhcOsKU?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/H8HMOhcOsKU?controls=1&rel=0"
   },
   "Single Arm Row": {
     gif: "assets/Seated_Row.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Seated-cable-rows-2.gif/220px-Seated-cable-rows-2.gif",
-    video: "https://www.youtube.com/embed/pYcpY20QaE8?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/pYcpY20QaE8?controls=1&rel=0"
   },
   "Pull-over": {
     gif: "assets/Pullover.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Dumbbell-pullover.gif/220px-Dumbbell-pullover.gif",
-    video: "https://www.youtube.com/embed/FK4rHfEqSB0?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/FK4rHfEqSB0?controls=1&rel=0"
   },
   "Reverse Fly": {
     gif: "assets/Reverse_Fly.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Reverse-Fly.gif/220px-Reverse-Fly.gif",
-    video: "https://www.youtube.com/embed/ttvANqfNQSY?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/ttvANqfNQSY?controls=1&rel=0"
   },
   "Overhead Tricep Extension": {
     gif: "assets/Overhead_Tricep_Extension.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Overhead-Tricep-Extension.gif/220px-Overhead-Tricep-Extension.gif",
-    video: "https://www.youtube.com/embed/YbX7Wd8jQ-Q?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/YbX7Wd8jQ-Q?controls=1&rel=0"
   },
   "Hammer Curl": {
     gif: "assets/Hammer_Curl.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Hammer-Curls.gif/220px-Hammer-Curls.gif",
-    video: "https://www.youtube.com/embed/zC3nLlEvin4?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/zC3nLlEvin4?controls=1&rel=0"
   },
   "Sumo Squat": {
     gif: "assets/Sumo_Squat.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Sumo-Squat.gif/220px-Sumo-Squat.gif",
-    video: "https://www.youtube.com/embed/QKKN9oMPHRU?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/QKKN9oMPHRU?controls=1&rel=0"
   },
   "Single Leg Deadlift": {
     gif: "assets/Romanian_Deadlift.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Romanian_deadlift.gif/220px-Romanian_deadlift.gif",
-    video: "https://www.youtube.com/embed/TGTqKFaKaT8?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/TGTqKFaKaT8?controls=1&rel=0"
   },
   "Step Up على كرسي": {
     gif: "assets/Step_Up.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Step-ups.gif/220px-Step-ups.gif",
-    video: "https://www.youtube.com/embed/dQqApCGd5Ss?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/dQqApCGd5Ss?controls=1&rel=0"
   },
   "Donkey Kick": {
     gif: "assets/Donkey_Kick.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Donkey-Kicks.gif/220px-Donkey-Kicks.gif",
-    video: "https://www.youtube.com/embed/SJ1Xuz9D-ZQ?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/SJ1Xuz9D-ZQ?controls=1&rel=0"
   },
   "Leg Raise": {
     gif: "assets/Leg_Raise.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Leg-Raise.gif/220px-Leg-Raise.gif",
-    video: "https://www.youtube.com/embed/l4kQd9eWclE?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/l4kQd9eWclE?controls=1&rel=0"
   },
   "Mountain Climber": {
     gif: "assets/Mountain_Climber.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Mountain-Climbers.gif/220px-Mountain-Climbers.gif",
-    video: "https://www.youtube.com/embed/nmwgirgXLYM?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/nmwgirgXLYM?controls=1&rel=0"
   },
   "Pallof Press": {
     gif: "assets/Push-up_عادي.gif",
     online_gif: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/PushUps.gif/220px-PushUps.gif",
-    video: "https://www.youtube.com/embed/AH_QZLm_0-s?autoplay=1&mute=1&controls=1&rel=0"
+    video: "https://www.youtube.com/embed/AH_QZLm_0-s?controls=1&rel=0"
   }
 };
 
@@ -364,9 +364,9 @@ body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;direc
 .media-tabs{display:flex;border-bottom:1px solid var(--border)}
 .media-tab{flex:1;padding:10px;background:none;border:none;color:var(--muted);font-family:'Cairo',sans-serif;font-size:.82rem;cursor:pointer;transition:all .2s;border-bottom:2px solid transparent}
 .media-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.gif-wrap{display:flex;justify-content:center;padding:20px;background:#000}
-.gif-wrap img{max-height:240px;border-radius:10px;object-fit:contain}
-.gif-error{padding:40px;text-align:center;color:var(--muted);font-size:.85rem}
+.video-play-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;padding:48px 20px;background:#0f172a;border:none;cursor:pointer;color:#94a3b8;font-size:.85rem;font-weight:600}
+.video-play-placeholder:hover{background:#1e293b}
+.video-play-icon{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;font-size:1.4rem}
 .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
 .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
 
@@ -429,26 +429,8 @@ body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;direc
 // ============================================================
 function ExerciseCard({ ex, idx }) {
   const [open, setOpen] = useState(false);
-  const [mediaTab, setMediaTab] = useState("gif");
+  const [videoPlaying, setVideoPlaying] = useState(false);
   const media = EXERCISE_MEDIA[ex.name];
-
-  const [imgSrc, setImgSrc] = useState(media ? media.gif : "");
-  const [imgError, setImgError] = useState(false);
-
-  useEffect(() => {
-    if (media) {
-      setImgSrc(media.gif);
-      setImgError(false);
-    }
-  }, [ex.name, mediaTab]);
-
-  const handleImgError = () => {
-    if (imgSrc === media.gif && media.online_gif) {
-      setImgSrc(media.online_gif);
-    } else {
-      setImgError(true);
-    }
-  };
 
   return (
     <div className={`ex-card ${open ? "open" : ""}`}>
@@ -469,7 +451,7 @@ function ExerciseCard({ ex, idx }) {
         {media && (
           <button
             className={`ex-expand-btn ${open ? "active" : ""}`}
-            onClick={() => setOpen(o => !o)}
+            onClick={() => { setOpen(o => !o); if (open) setVideoPlaying(false); }}
           >
             {open ? "إخفاء ▲" : "شوف الحركة ▼"}
           </button>
@@ -478,35 +460,22 @@ function ExerciseCard({ ex, idx }) {
 
       {open && media && (
         <div className="ex-media">
-          <div className="media-tabs">
-            <button className={`media-tab ${mediaTab === "gif" ? "active" : ""}`} onClick={() => setMediaTab("gif")}>🖼️ صورة متحركة</button>
-            <button className={`media-tab ${mediaTab === "video" ? "active" : ""}`} onClick={() => setMediaTab("video")}>▶️ فيديو قصير</button>
-          </div>
-
-          {mediaTab === "gif" && (
-            <div className="gif-wrap">
-              {imgError ? (
-                <div className="gif-error">⚠️ الصورة مش متاحة دلوقتي<br/>جرب الفيديو</div>
-              ) : (
-                <img
-                  src={imgSrc}
-                  alt={ex.name}
-                  onError={handleImgError}
-                  style={{ maxHeight: 240, borderRadius: 10, objectFit: "contain" }}
+          {media.video && (
+            videoPlaying ? (
+              <div className="video-wrap">
+                <iframe
+                  src={media.video}
+                  title={ex.name}
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
                 />
-              )}
-            </div>
-          )}
-
-          {mediaTab === "video" && (
-            <div className="video-wrap">
-              <iframe
-                src={media.video}
-                title={ex.name}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
+              </div>
+            ) : (
+              <button className="video-play-placeholder" onClick={() => setVideoPlaying(true)} type="button">
+                <span className="video-play-icon">▶</span>
+                <span>اضغط لتشغيل الفيديو</span>
+              </button>
+            )
           )}
 
           <div style={{ padding: "10px 16px", fontSize: ".78rem", color: "var(--muted)", borderTop: "1px solid var(--border)", display:"flex", gap:"16px", flexWrap:"wrap" }}>
