@@ -2301,11 +2301,12 @@
         { name: "فراخ بروست",        icon: "🍗", keywords: ["بروستد", "كنتاكي"], per100g: { cal: 220, p: 20,  c: 8,   f: 12  } },
         { name: "برجر مصري",         icon: "🍔", keywords: ["برجر", "burger"], per100g: { cal: 280, p: 14,  c: 25,  f: 14  } },
         { name: "حواوشي",            icon: "🥙", keywords: ["hawawshi"], per100g: { cal: 290, p: 12,  c: 22,  f: 17  } },
-        { name: "كفتة ساندوتش",      icon: "🥪", keywords: ["كفتة"], per100g: { cal: 250, p: 14,  c: 20,  f: 13  } },
+        { name: "ساندوتش كفتة مشوية",icon: "🥪", keywords: ["كفتة ساندوتش", "كفته"], defaultGrams: 130, per100g: { cal: 250, p: 14,  c: 20,  f: 13  } },
         { name: "ساندوتش بطاطس",     icon: "🥪", keywords: ["بطاطس"], per100g: { cal: 270, p: 5,   c: 35,  f: 12  } },
         { name: "فول وطعمية",        icon: "🥙", keywords: ["فول طعمية", "ساندوتش"], per100g: { cal: 180, p: 8,   c: 22,  f: 7   } },
-        { name: "ساندوتش طعمية",     icon: "🥙", keywords: ["طعمية ساندوتش", "طعميه"], per100g: { cal: 200, p: 7,   c: 24,  f: 9   } },
-        { name: "ساندوتش فول",       icon: "🥙", keywords: ["فول ساندوتش", "سندوتش فول"], per100g: { cal: 160, p: 7,   c: 20,  f: 5   } },
+        { name: "ساندوتش طعمية",     icon: "🥙", keywords: ["طعمية ساندوتش", "طعميه"], defaultGrams: 130, per100g: { cal: 200, p: 7,   c: 24,  f: 9   } },
+        { name: "ساندوتش فول",       icon: "🥙", keywords: ["فول ساندوتش", "سندوتش فول"], defaultGrams: 120, per100g: { cal: 160, p: 7,   c: 20,  f: 5   } },
+        { name: "ساندوتش بيض بلدي",  icon: "🥪", keywords: ["بيض", "ساندوتش بيض"], defaultGrams: 120, per100g: { cal: 220, p: 10,  c: 22,  f: 10  } },
         { name: "شاورما فراخ ساندوتش", icon: "🌯", keywords: ["شاورما"], per100g: { cal: 190, p: 16,  c: 18,  f: 8   } },
         { name: "شاورما لحمة ساندوتش", icon: "🌯", keywords: ["شاورما"], per100g: { cal: 240, p: 18,  c: 16,  f: 14  } },
         { name: "كبدة إسكندراني ساندوتش", icon: "🥪", keywords: ["كبدة", "إسكندراني"], per100g: { cal: 210, p: 15,  c: 18,  f: 10  } },
@@ -2327,7 +2328,7 @@
         { name: "فول مدمس مفرد", icon: "🫘", keywords: ["فول", "فول مدمس"], per100g: { cal: 90, p: 6, c: 15, f: 0.5 } },
         { name: "طعمية مفردة", icon: "🧆", keywords: ["طعمية", "طعميه"], per100g: { cal: 330, p: 13, c: 32, f: 17 } },
         { name: "مكرونة جمبري", icon: "🍤", keywords: ["مكرونه جمبري"], per100g: { cal: 180, p: 14, c: 18, f: 7 } },
-        { name: "طاجن مكرونة", icon: "🥘", keywords: ["طاجن مكرونه"], per100g: { cal: 220, p: 10, c: 25, f: 9 } },
+        { name: "طاجن مكرونة بالفراخ", icon: "🥘", keywords: ["طاجن مكرونه", "كشري", "مكرونة"], defaultGrams: 350, per100g: { cal: 180, p: 8, c: 22, f: 6 } },
       ],
       fat: [
         { name: "زيت ذرة",           icon: "🫙", per100g: { cal: 884, p: 0,   c: 0,   f: 100 } },
@@ -2731,7 +2732,8 @@
               p: item.per100g.p,
               c: item.per100g.c,
               f: item.per100g.f,
-              isLocal: true
+              isLocal: true,
+              defaultGrams: item.defaultGrams
             });
           }
         });
@@ -3802,7 +3804,7 @@
         id: 'custom_' + Date.now(),
         name: food.name,
         category: 'custom',
-        grams: 100,
+        grams: food.defaultGrams || 100,
         per100g: { ...food.per100g }
       });
       saveMeals();
@@ -3958,7 +3960,7 @@
         id: 'search_' + Date.now(),
         name: r.name,
         category: 'custom',
-        grams: 100,
+        grams: r.defaultGrams || 100,
         per100g: { cal: r.cal, p: r.p, c: r.c, f: r.f }
       });
       saveMeals();
