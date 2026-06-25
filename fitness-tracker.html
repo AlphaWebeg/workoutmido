@@ -1960,7 +1960,15 @@
           <div class="logo-sub">Upper/Lower • Lean Bulk 2,490 kcal</div>
         </div>
       </div>
-      <div class="topbar-date" id="todayDate"></div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="topbar-date" id="todayDate"></div>
+        <button onclick="setTab('settings')" style="background:none;border:none;color:var(--text-color);cursor:pointer;display:flex;align-items:center;padding:5px;" aria-label="الإعدادات">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -2390,12 +2398,6 @@
         { id:"bread_p",  name:"عيش بلدي",      category:"carb",    grams:130, per100g:{cal:230,p:7.5,c:46,f:1.5} },
         { id:"tuna_p",   name:"تونة علبة",      category:"protein", grams:185, per100g:{cal:97, p:21,c:0, f:1  } },
         { id:"banana",   name:"موزة",           category:"fruit",   grams:120, per100g:{cal:89, p:1, c:23,f:0.3} },
-      ]},
-      postworkout: { label: "بعد التدريب",   icon: "💪", mealClass: "postworkout", items: [
-        { id:"chicken",  name:"صدر فراخ مسلوق",category:"protein", grams:200, per100g:{cal:110,p:23,c:0, f:2  } },
-        { id:"rice",     name:"أرز أبيض",       category:"carb",    grams:200, per100g:{cal:130,p:2.5,c:28,f:0.3} },
-        { id:"veg_pw",   name:"سلطة",           category:"veg",     grams:100, per100g:{cal:20, p:1, c:4, f:0  } },
-        { id:"oil",      name:"زيت زيتون",      category:"fat",     grams:5,   per100g:{cal:884,p:0, c:0, f:100} },
       ]},
       lunch:       { label: "الغداء",         icon: "🌞", mealClass: "lunch", items: [
         { id:"protein_l",name:"فراخ مشوية",    category:"protein", grams:150, per100g:{cal:165,p:31,c:0, f:4  } },
@@ -2843,19 +2845,6 @@
               <path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/>
             </svg>
             التغذية
-          </button>
-          <button
-            class="tab-nav-btn ${currentTab === 'settings' ? 'active' : ''}"
-            onclick="setTab('settings')"
-            role="tab"
-            aria-selected="${currentTab === 'settings'}"
-            id="tab-settings"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-              <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-            </svg>
-            الإعدادات
           </button>
         </div>
       `;
