@@ -1880,56 +1880,6 @@
       animation: flashHighlight 1.2s ease-out;
     }
 
-    /* Switch styles */
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 28px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      background-color: #cbd5e1;
-      transition: var(--t-base);
-      border-radius: var(--r-full);
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 20px;
-      width: 20px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: var(--t-base);
-      border-radius: 50%;
-    }
-
-    input:checked + .slider {
-      background-color: var(--primary);
-    }
-
-    input:focus + .slider {
-      box-shadow: 0 0 1px var(--primary);
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(22px);
-    }
-
     /* ===================================
        PREFERS REDUCED MOTION
     =================================== */
@@ -1960,15 +1910,7 @@
           <div class="logo-sub">Upper/Lower • Lean Bulk 2,490 kcal</div>
         </div>
       </div>
-      <div style="display:flex; align-items:center; gap:10px;">
-        <div class="topbar-date" id="todayDate"></div>
-        <button onclick="setTab('settings')" style="background:none;border:none;color:var(--text-color);cursor:pointer;display:flex;align-items:center;padding:5px;" aria-label="الإعدادات">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
-        </button>
-      </div>
+      <div class="topbar-date" id="todayDate"></div>
     </div>
   </nav>
 
@@ -2309,12 +2251,11 @@
         { name: "فراخ بروست",        icon: "🍗", keywords: ["بروستد", "كنتاكي"], per100g: { cal: 220, p: 20,  c: 8,   f: 12  } },
         { name: "برجر مصري",         icon: "🍔", keywords: ["برجر", "burger"], per100g: { cal: 280, p: 14,  c: 25,  f: 14  } },
         { name: "حواوشي",            icon: "🥙", keywords: ["hawawshi"], per100g: { cal: 290, p: 12,  c: 22,  f: 17  } },
-        { name: "ساندوتش كفتة مشوية",icon: "🥪", keywords: ["كفتة ساندوتش", "كفته"], defaultGrams: 130, per100g: { cal: 250, p: 14,  c: 20,  f: 13  } },
+        { name: "كفتة ساندوتش",      icon: "🥪", keywords: ["كفتة"], per100g: { cal: 250, p: 14,  c: 20,  f: 13  } },
         { name: "ساندوتش بطاطس",     icon: "🥪", keywords: ["بطاطس"], per100g: { cal: 270, p: 5,   c: 35,  f: 12  } },
         { name: "فول وطعمية",        icon: "🥙", keywords: ["فول طعمية", "ساندوتش"], per100g: { cal: 180, p: 8,   c: 22,  f: 7   } },
-        { name: "ساندوتش طعمية",     icon: "🥙", keywords: ["طعمية ساندوتش", "طعميه"], defaultGrams: 130, per100g: { cal: 200, p: 7,   c: 24,  f: 9   } },
-        { name: "ساندوتش فول",       icon: "🥙", keywords: ["فول ساندوتش", "سندوتش فول"], defaultGrams: 120, per100g: { cal: 160, p: 7,   c: 20,  f: 5   } },
-        { name: "ساندوتش بيض بلدي",  icon: "🥪", keywords: ["بيض", "ساندوتش بيض"], defaultGrams: 120, per100g: { cal: 220, p: 10,  c: 22,  f: 10  } },
+        { name: "ساندوتش طعمية",     icon: "🥙", keywords: ["طعمية ساندوتش"], per100g: { cal: 200, p: 7,   c: 24,  f: 9   } },
+        { name: "ساندوتش فول",       icon: "🥙", keywords: ["فول ساندوتش"], per100g: { cal: 160, p: 7,   c: 20,  f: 5   } },
         { name: "شاورما فراخ ساندوتش", icon: "🌯", keywords: ["شاورما"], per100g: { cal: 190, p: 16,  c: 18,  f: 8   } },
         { name: "شاورما لحمة ساندوتش", icon: "🌯", keywords: ["شاورما"], per100g: { cal: 240, p: 18,  c: 16,  f: 14  } },
         { name: "كبدة إسكندراني ساندوتش", icon: "🥪", keywords: ["كبدة", "إسكندراني"], per100g: { cal: 210, p: 15,  c: 18,  f: 10  } },
@@ -2333,10 +2274,6 @@
         { name: "سمك بلطي مشوي (وجبة شارع)", icon: "🐟", per100g: { cal: 120, p: 17,  c: 0,   f: 5   } },
         { name: "بطاطس محمرة (كبيرة)", icon: "🍟", keywords: ["فرايز"], per100g: { cal: 312, p: 3.4, c: 41,  f: 15  } },
         { name: "أرز بالخلطة (كشري)", icon: "🍚", per100g: { cal: 145, p: 3.5, c: 28,  f: 2   } },
-        { name: "فول مدمس مفرد", icon: "🫘", keywords: ["فول", "فول مدمس"], per100g: { cal: 90, p: 6, c: 15, f: 0.5 } },
-        { name: "طعمية مفردة", icon: "🧆", keywords: ["طعمية", "طعميه"], per100g: { cal: 330, p: 13, c: 32, f: 17 } },
-        { name: "مكرونة جمبري", icon: "🍤", keywords: ["مكرونه جمبري"], per100g: { cal: 180, p: 14, c: 18, f: 7 } },
-        { name: "طاجن مكرونة بالفراخ", icon: "🥘", keywords: ["طاجن مكرونه", "كشري", "مكرونة"], defaultGrams: 350, per100g: { cal: 180, p: 8, c: 22, f: 6 } },
       ],
       fat: [
         { name: "زيت ذرة",           icon: "🫙", per100g: { cal: 884, p: 0,   c: 0,   f: 100 } },
@@ -2399,6 +2336,12 @@
         { id:"tuna_p",   name:"تونة علبة",      category:"protein", grams:185, per100g:{cal:97, p:21,c:0, f:1  } },
         { id:"banana",   name:"موزة",           category:"fruit",   grams:120, per100g:{cal:89, p:1, c:23,f:0.3} },
       ]},
+      postworkout: { label: "بعد التدريب",   icon: "💪", mealClass: "postworkout", items: [
+        { id:"chicken",  name:"صدر فراخ مسلوق",category:"protein", grams:200, per100g:{cal:110,p:23,c:0, f:2  } },
+        { id:"rice",     name:"أرز أبيض",       category:"carb",    grams:200, per100g:{cal:130,p:2.5,c:28,f:0.3} },
+        { id:"veg_pw",   name:"سلطة",           category:"veg",     grams:100, per100g:{cal:20, p:1, c:4, f:0  } },
+        { id:"oil",      name:"زيت زيتون",      category:"fat",     grams:5,   per100g:{cal:884,p:0, c:0, f:100} },
+      ]},
       lunch:       { label: "الغداء",         icon: "🌞", mealClass: "lunch", items: [
         { id:"protein_l",name:"فراخ مشوية",    category:"protein", grams:150, per100g:{cal:165,p:31,c:0, f:4  } },
         { id:"carb_l",   name:"أرز أبيض",      category:"carb",    grams:150, per100g:{cal:130,p:2.5,c:28,f:0.3} },
@@ -2411,6 +2354,8 @@
         { id:"laban",    name:"لبن رايب",        category:"dairy",   grams:200, per100g:{cal:61, p:3.5,c:5, f:3.3} },
       ]},
     };
+
+    const TARGETS = { cal: 2490, p: 130, c: 335, f: 70 };
 
     // ============================================================
     // FOOD SEARCH STATE
@@ -2438,51 +2383,6 @@
     const videoPlaying = {};
     const openMeals = { breakfast: true, preworkout: true, postworkout: true, lunch: true, dinner: true };
     let swapTarget = null; // kept for compat
-    
-    // Settings state
-    let settings = {};
-    let dailyWeights = {};
-
-    try {
-      const saved = localStorage.getItem('workout_settings');
-      if (saved) settings = JSON.parse(saved);
-      
-      const savedWeights = localStorage.getItem('workout_daily_weights');
-      if (savedWeights) dailyWeights = JSON.parse(savedWeights);
-
-    } catch(e) {}
-    
-    // Default settings
-    const defaultSettings = {
-      // Body settings
-      weight: 70, // kg
-      height: 170, // cm
-      age: 25,
-      gender: 'male', // male, female
-      
-      // Goal settings
-      goalWeight: 70,
-      goalCalories: 2490,
-      goalProtein: 130, // grams
-      goalCarbs: 335, // grams
-      goalFat: 70, // grams
-      activityLevel: 'moderate', // sedentary, light, moderate, active, very-active
-      
-      // App settings
-      darkMode: false,
-      language: 'ar',
-      notifications: true,
-      restTimer: 60, // seconds
-    };
-    
-    // Merge with defaults
-    settings = { ...defaultSettings, ...settings };
-    
-    // Update TARGETS from settings
-    const TARGETS = { cal: settings.goalCalories, p: settings.goalProtein, c: settings.goalCarbs, f: settings.goalFat };
-    
-    // Apply dark mode
-    applyDarkMode();
 
     // --- WORKOUT PROGRESS STATE ---
     let workoutProgress = {};
@@ -2530,7 +2430,7 @@
         totalSets += sets;
         
         const setStatus = progress[ex.name] || Array(sets).fill(false);
-        const doneCount = setStatus.filter(s => s === true || (s && s.done === true)).length;
+        const doneCount = setStatus.filter(Boolean).length;
         completedSets += doneCount;
         
         let status = "not_started"; // not_started, in_progress, completed
@@ -2657,20 +2557,6 @@
       }, 100);
     };
 
-    
-    window.updateReps = function(exName, setIdx, newReps) {
-      const dateKey = getDateOfDayName(activeDay);
-      if (!workoutProgress[dateKey]) workoutProgress[dateKey] = {};
-      if (!workoutProgress[dateKey][exName]) workoutProgress[dateKey][exName] = [];
-      const val = workoutProgress[dateKey][exName][setIdx];
-      if (typeof val === 'object' && val !== null) {
-        val.reps = newReps;
-      } else {
-        workoutProgress[dateKey][exName][setIdx] = { done: !!val, reps: newReps };
-      }
-      saveProgress();
-    };
-
     window.toggleSet = function(exName, setIdx, maxSets, restStr) {
       const dateKey = getDateOfDayName(activeDay);
       if (!workoutProgress[dateKey]) {
@@ -2680,15 +2566,8 @@
         workoutProgress[dateKey][exName] = Array(maxSets).fill(false);
       }
       
-      let currentVal;
-      const val = workoutProgress[dateKey][exName][setIdx];
-      if (typeof val === 'object' && val !== null) {
-        currentVal = !val.done;
-        val.done = currentVal;
-      } else {
-        currentVal = !val;
-        workoutProgress[dateKey][exName][setIdx] = { done: currentVal, reps: "" };
-      }
+      const currentVal = !workoutProgress[dateKey][exName][setIdx];
+      workoutProgress[dateKey][exName][setIdx] = currentVal;
       saveProgress();
       
       if (currentVal) {
@@ -2761,8 +2640,7 @@
               p: item.per100g.p,
               c: item.per100g.c,
               f: item.per100g.f,
-              isLocal: true,
-              defaultGrams: item.defaultGrams
+              isLocal: true
             });
           }
         });
@@ -2998,21 +2876,11 @@
                   <div class="set-tracker-title">تتبع المجموعات (اضغط لإكمال المجموعة)</div>
                   <div class="set-row-list">
                     ${Array.from({ length: ex.sets }).map((_, sIdx) => {
-                      const val = currentProgress[sIdx];
-                      const isDone = val === true || (val && val.done === true);
-                      const repsVal = (val && typeof val === 'object' && val.reps !== undefined) ? val.reps : (parseInt(ex.reps.replace(/[^0-9]/g, '')) || '');
-                      const prevValText = (val && typeof val === 'object' && val.reps) ? `(السابق: ${val.reps})` : '';
+                      const isDone = currentProgress[sIdx] || false;
                       return `
                         <div class="set-check-row ${isDone ? 'checked' : ''}" onclick="toggleSet('${ex.name.replace(/'/g, "\\'")}', ${sIdx}, ${ex.sets}, '${ex.rest}')" role="checkbox" aria-checked="${isDone}" tabindex="0">
                           <div class="set-check-num">المجموعة ${sIdx + 1}</div>
-                          <div class="set-check-reps" style="display:flex; align-items:center; gap:6px;">
-                            <input type="number" class="rep-input" style="width:45px; text-align:center; border:1px solid #ddd; border-radius:4px; padding:2px; font-size:14px; background:#fff; color:#333;" 
-                                   value="${repsVal}" 
-                                   onclick="event.stopPropagation()" 
-                                   onchange="updateReps('${ex.name.replace(/'/g, "\\'")}', ${sIdx}, this.value)" 
-                                   placeholder="عدات" />
-                            <span style="font-size:11px; color:#888;">${prevValText}</span>
-                          </div>
+                          <div class="set-check-reps">${ex.reps} تكرار</div>
                           <div class="set-check-box">
                             ${isDone ? `
                               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
@@ -3031,6 +2899,10 @@
                 <div class="ex-media-panel">
                   <div class="media-content">
                     ${mediaContent}
+                    ${setCheckboxesHtml}
+                  </div>
+                </div>
+              `;                    ${mediaContent}
                     <div class="ex-detail-grid">
                       <div class="ex-detail-chip">
                         <div class="dval">${ex.sets}</div>
@@ -3102,10 +2974,7 @@
 
       // --- FOOD TAB ---
       if (currentTab === "food") {
-        html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                   <p class="section-heading" style="margin:0;">ملخص الماكرو اليوم</p>
-                   <button onclick="openSmartSwapModal()" class="add-food-btn" style="width:auto; margin:0; padding:6px 12px; font-size:12px; background:#6366f1;">البديل الذكي 🔄</button>
-                 </div>`;
+        html += `<p class="section-heading">ملخص الماكرو اليوم</p>`;
         html += `
           <div class="macro-grid" role="list" aria-label="ملخص الماكرو">
             ${[
@@ -3228,350 +3097,6 @@
         });
 
         html += `</div>`;
-      }
-
-
-      // --- SETTINGS TAB ---
-      if (currentTab === "settings") {
-        const dateKey = getDateOfDayName(activeDay);
-        html += `<p class="section-heading" aria-label="سجل التطور وكسر الثبات">سجل التطور وكسر الثبات</p>`;
-        html += `
-          <div class="ex-list" style="margin-bottom:20px;" role="list">
-            <div class="ex-card" role="listitem">
-              <div style="padding:15px;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-weight:bold; color:var(--text-color);">وزن اليوم:</span>
-                  <div class="gram-wrapper">
-                    <input class="gram-input" type="number" value="${dailyWeights[dateKey] || settings.weight}" onchange="saveDailyWeight(this.value)" step="0.5" style="width:70px;" />
-                    <span class="gram-unit">كجم</span>
-                  </div>
-                </div>
-                <div style="margin-top:15px; display:flex; justify-content:space-between; font-size:13px; color:var(--text-color);">
-                  <span>متوسط آخر 7 أيام:</span>
-                  <span style="font-weight:bold; color:var(--primary-color);">${calcAvgWeight(0, 6)} كجم</span>
-                </div>
-                <div style="margin-top:5px; display:flex; justify-content:space-between; font-size:13px; color:var(--text-color);">
-                  <span>متوسط الأسبوع الماضي:</span>
-                  <span style="font-weight:bold;">${calcAvgWeight(7, 13)} كجم</span>
-                </div>
-                <button class="add-food-btn" style="margin-top:15px; background:#f59e0b;" onclick="triggerPlateauBreaker()">
-                  كسر الثبات (خصم 150 سعرة) ⚡
-                </button>
-              </div>
-            </div>
-          </div>
-        `;
-        html += `<p class="section-heading" aria-label="قسم الإعدادات الشخصية">معلومات الجسم</p>`;
-
-        html += `
-          <div class="ex-list" role="list">
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">⚖️</div>
-                <div class="ex-info">
-                  <div class="ex-name">الوزن الحالي</div>
-                </div>
-                <div class="ex-right">
-                  <div class="gram-wrapper">
-                    <input
-                      class="gram-input"
-                      type="number"
-                      value="${settings.weight}"
-                      min="30"
-                      max="300"
-                      step="0.5"
-                      aria-label="الوزن بالكيلوغرام"
-                      onchange="updateSetting('weight', this.value)"
-                    />
-                    <span class="gram-unit">كجم</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">📏</div>
-                <div class="ex-info">
-                  <div class="ex-name">الطول</div>
-                </div>
-                <div class="ex-right">
-                  <div class="gram-wrapper">
-                    <input
-                      class="gram-input"
-                      type="number"
-                      value="${settings.height}"
-                      min="100"
-                      max="250"
-                      aria-label="الطول بالسنتيمتر"
-                      onchange="updateSetting('height', this.value)"
-                    />
-                    <span class="gram-unit">سم</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">🎂</div>
-                <div class="ex-info">
-                  <div class="ex-name">العمر</div>
-                </div>
-                <div class="ex-right">
-                  <div class="gram-wrapper">
-                    <input
-                      class="gram-input"
-                      type="number"
-                      value="${settings.age}"
-                      min="10"
-                      max="100"
-                      aria-label="العمر بالسنوات"
-                      onchange="updateSetting('age', this.value)"
-                    />
-                    <span class="gram-unit">سنة</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">👤</div>
-                <div class="ex-info">
-                  <div class="ex-name">الجنس</div>
-                </div>
-                <div class="ex-right">
-                  <select
-                    class="gram-input"
-                    style="padding: 8px 12px;"
-                    onchange="updateSetting('gender', this.value)"
-                  >
-                    <option value="male" ${settings.gender === 'male' ? 'selected' : ''}>ذكر</option>
-                    <option value="female" ${settings.gender === 'female' ? 'selected' : ''}>أنثى</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-
-        html += `<p class="section-heading" aria-label="قسم الأهداف">الأهداف</p>`;
-        html += `
-          <div class="ex-list" role="list">
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">🎯</div>
-                <div class="ex-info">
-                  <div class="ex-name">الوزن المستهدف</div>
-                </div>
-                <div class="ex-right">
-                  <div class="gram-wrapper">
-                    <input
-                      class="gram-input"
-                      type="number"
-                      value="${settings.goalWeight}"
-                      min="30"
-                      max="300"
-                      step="0.5"
-                      aria-label="الوزن المستهدف بالكيلوغرام"
-                      onchange="updateSetting('goalWeight', this.value)"
-                    />
-                    <span class="gram-unit">كجم</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">🔥</div>
-                <div class="ex-info">
-                  <div class="ex-name">السعرات الحرارية المستهدفة</div>
-                </div>
-                <div class="ex-right">
-                  <div class="gram-wrapper">
-                    <input
-                      class="gram-input"
-                      type="number"
-                      value="${settings.goalCalories}"
-                      min="1000"
-                      max="5000"
-                      aria-label="السعرات الحرارية"
-                      onchange="updateSetting('goalCalories', this.value)"
-                    />
-                    <span class="gram-unit">سعر</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">🥩</div>
-                <div class="ex-info">
-                  <div class="ex-name">البروتين المستهدف</div>
-                </div>
-                <div class="ex-right">
-                  <div class="gram-wrapper">
-                    <input
-                      class="gram-input"
-                      type="number"
-                      value="${settings.goalProtein}"
-                      min="50"
-                      max="300"
-                      aria-label="البروتين بالغرام"
-                      onchange="updateSetting('goalProtein', this.value)"
-                    />
-                    <span class="gram-unit">غم</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">🍚</div>
-                <div class="ex-info">
-                  <div class="ex-name">الكاربوهدرات المستهدف</div>
-                </div>
-                <div class="ex-right">
-                  <div class="gram-wrapper">
-                    <input
-                      class="gram-input"
-                      type="number"
-                      value="${settings.goalCarbs}"
-                      min="50"
-                      max="500"
-                      aria-label="الكاربوهدرات بالغرام"
-                      onchange="updateSetting('goalCarbs', this.value)"
-                    />
-                    <span class="gram-unit">غم</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">🥑</div>
-                <div class="ex-info">
-                  <div class="ex-name">الدهون المستهدفة</div>
-                </div>
-                <div class="ex-right">
-                  <div class="gram-wrapper">
-                    <input
-                      class="gram-input"
-                      type="number"
-                      value="${settings.goalFat}"
-                      min="20"
-                      max="150"
-                      aria-label="الدهون بالغرام"
-                      onchange="updateSetting('goalFat', this.value)"
-                    />
-                    <span class="gram-unit">غم</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">🏃</div>
-                <div class="ex-info">
-                  <div class="ex-name">مستوى النشاط اليومي</div>
-                </div>
-                <div class="ex-right">
-                  <select
-                    class="gram-input"
-                    style="padding: 8px 12px;"
-                    onchange="updateSetting('activityLevel', this.value)"
-                  >
-                    <option value="sedentary" ${settings.activityLevel === 'sedentary' ? 'selected' : ''}>قليل الحركة</option>
-                    <option value="light" ${settings.activityLevel === 'light' ? 'selected' : ''}>نشاط خفيف</option>
-                    <option value="moderate" ${settings.activityLevel === 'moderate' ? 'selected' : ''}>نشاط متوسط</option>
-                    <option value="active" ${settings.activityLevel === 'active' ? 'selected' : ''}>نشاط عالي</option>
-                    <option value="very-active" ${settings.activityLevel === 'very-active' ? 'selected' : ''}>نشاط جداً عالي</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-
-        html += `<p class="section-heading" aria-label="قسم إعدادات التطبيق">إعدادات التطبيق</p>`;
-        html += `
-          <div class="ex-list" role="list">
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">🌙</div>
-                <div class="ex-info">
-                  <div class="ex-name">الوضع الداكن</div>
-                </div>
-                <div class="ex-right">
-                  <label class="switch">
-                    <input type="checkbox" ${settings.darkMode ? 'checked' : ''} onchange="updateSetting('darkMode', this.checked)">
-                    <span class="slider"></span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">🔔</div>
-                <div class="ex-info">
-                  <div class="ex-name">الإشعارات</div>
-                </div>
-                <div class="ex-right">
-                  <label class="switch">
-                    <input type="checkbox" ${settings.notifications ? 'checked' : ''} onchange="updateSetting('notifications', this.checked)">
-                    <span class="slider"></span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="ex-card" role="listitem">
-              <div class="ex-header" style="cursor: default;">
-                <div class="ex-num-badge" aria-hidden="true">⏱️</div>
-                <div class="ex-info">
-                  <div class="ex-name">وقت الراحة الافتراضي</div>
-                </div>
-                <div class="ex-right">
-                  <div class="gram-wrapper">
-                    <input
-                      class="gram-input"
-                      type="number"
-                      value="${settings.restTimer}"
-                      min="10"
-                      max="300"
-                      aria-label="وقت الراحة بالثواني"
-                      onchange="updateSetting('restTimer', this.value)"
-                    />
-                    <span class="gram-unit">ث</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-
-        // Calculate BMI for info
-        const bmi = (settings.weight / ((settings.height / 100) ** 2)).toFixed(1);
-        let bmiStatus = 'وزن طبيعي';
-        let bmiColor = '#10b981';
-        if (bmi < 18.5) { bmiStatus = 'نقص في الوزن'; bmiColor = '#f59e0b'; }
-        else if (bmi >= 25 && bmi < 30) { bmiStatus = 'وزن زائد'; bmiColor = '#f59e0b'; }
-        else if (bmi >= 30) { bmiStatus = 'سمنة'; bmiColor = '#ef4444'; }
-
-        html += `
-          <div class="daily-summary-card fade-in" role="region" aria-label="ملخص الجسم">
-            <div class="summary-top">
-              <div class="summary-metrics">
-                <div class="metric-item">
-                  <span class="m-val" style="color: ${bmiColor};">${bmi}</span>
-                  <span class="m-lbl">مؤشر كتلة الجسم (BMI)</span>
-                </div>
-                <div class="metric-divider"></div>
-                <div class="metric-item">
-                  <span class="m-val">${bmiStatus}</span>
-                  <span class="m-lbl">الحالة</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
       }
 
       // ─────────────────────────────────────────────────
@@ -3765,57 +3290,6 @@
         }
       }
 
-      
-      if (smartSwapState.open) {
-        const allFoods = [...EGYPTIAN_FOODS, ...addedFoods];
-        
-        html += `
-          <div class="modal-overlay" onclick="closeSmartSwapModal()" role="dialog" aria-modal="true" aria-label="البديل الذكي">
-            <div class="modal" onclick="event.stopPropagation()">
-              <div class="modal-handle" aria-hidden="true"></div>
-              <div class="modal-title">البديل الذكي 🔄</div>
-              <div class="modal-subtitle">حساب الجرامات المطلوبة للحفاظ على الماكروز</div>
-              
-              <div style="margin-top:15px; display:flex; flex-direction:column; gap:10px;">
-                <label style="font-size:13px; font-weight:600;">الأكلة الأساسية (من خطة المدرب):</label>
-                <select style="padding:10px; border-radius:8px; border:1px solid #ddd; width:100%; font-family:inherit;" 
-                        onchange="smartSwapState.baseFood = this.value; smartSwapState.resultGrams = null; renderApp();">
-                  <option value="">-- اختر الأكلة الأساسية --</option>
-                  ${allFoods.map(f => `<option value="${f.name}" ${smartSwapState.baseFood === f.name ? 'selected' : ''}>${f.name}</option>`).join('')}
-                </select>
-                
-                <label style="font-size:13px; font-weight:600;">الكمية بالجرام:</label>
-                <input type="number" value="${smartSwapState.baseGrams}" 
-                       onchange="smartSwapState.baseGrams = this.value; smartSwapState.resultGrams = null; renderApp();"
-                       style="padding:10px; border-radius:8px; border:1px solid #ddd; width:100%; font-family:inherit;" />
-                
-                <label style="font-size:13px; font-weight:600; margin-top:10px;">الأكلة البديلة:</label>
-                <select style="padding:10px; border-radius:8px; border:1px solid #ddd; width:100%; font-family:inherit;" 
-                        onchange="smartSwapState.targetFood = this.value; smartSwapState.resultGrams = null; renderApp();">
-                  <option value="">-- اختر الأكلة البديلة --</option>
-                  ${allFoods.map(f => `<option value="${f.name}" ${smartSwapState.targetFood === f.name ? 'selected' : ''}>${f.name}</option>`).join('')}
-                </select>
-                
-                <button class="add-food-btn" onclick="calculateSmartSwap()" style="margin-top:15px; background:#10b981;">احسب الكمية</button>
-                
-                ${smartSwapState.resultGrams !== null ? `
-                  <div style="margin-top:15px; padding:15px; background:#ecfdf5; border-radius:8px; border:1px solid #a7f3d0; text-align:center;">
-                    <div style="font-size:14px; color:#065f46; margin-bottom:5px;">لتحصل على نفس الماكروز تحتاج:</div>
-                    <div style="font-size:24px; font-weight:bold; color:#059669;">${smartSwapState.resultGrams} جرام</div>
-                    <div style="font-size:14px; color:#065f46;">من ${smartSwapState.targetFood}</div>
-                  </div>
-                ` : ''}
-              </div>
-              
-              <button class="close-btn" onclick="closeSmartSwapModal()" style="margin-top:20px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                إغلاق
-              </button>
-            </div>
-          </div>
-        `;
-      }
-
       // Render Floating Rest Timer Widget
       if (timerState.active) {
         const percent = Math.round((timerState.remaining / timerState.duration) * 100);
@@ -3848,135 +3322,11 @@
     // ============================================================
     // STATE ACTIONS
     // ============================================================
-    
-    let smartSwapState = { open: false, baseFood: '', baseGrams: 100, targetFood: '', resultGrams: null };
-
-    window.openSmartSwapModal = function() {
-      smartSwapState = { open: true, baseFood: '', baseGrams: 100, targetFood: '', resultGrams: null };
-      renderApp();
-    };
-    window.closeSmartSwapModal = function() {
-      smartSwapState.open = false;
-      renderApp();
-    };
-    window.calculateSmartSwap = function() {
-      if (!smartSwapState.baseFood || !smartSwapState.targetFood) return;
-      
-      const allFoods = [...EGYPTIAN_FOODS, ...addedFoods];
-      const base = allFoods.find(f => f.name === smartSwapState.baseFood);
-      const target = allFoods.find(f => f.name === smartSwapState.targetFood);
-      
-      if (base && target) {
-        // Match primary macro: protein if > 10g per 100g, else calories
-        const isProtein = base.per100g.p > 10;
-        
-        let targetAmount;
-        if (isProtein) {
-            const baseProtein = (base.per100g.p / 100) * smartSwapState.baseGrams;
-            targetAmount = (baseProtein / target.per100g.p) * 100;
-        } else {
-            const baseCal = (base.per100g.cal / 100) * smartSwapState.baseGrams;
-            targetAmount = (baseCal / target.per100g.cal) * 100;
-        }
-        
-        smartSwapState.resultGrams = Math.round(targetAmount);
-        renderApp();
-      }
-    };
-
     window.setActiveDay = function(day) { activeDay = day; renderApp(); };
     window.setTab = function(tab) { currentTab = tab; renderApp(); };
     window.toggleExercise = function(exName) { openExercises[exName] = !openExercises[exName]; renderApp(); };
     window.playExerciseVideo = function(exName) { videoPlaying[exName] = true; renderApp(); };
     window.toggleMeal = function(mealKey) { openMeals[mealKey] = !openMeals[mealKey]; renderApp(); };
-    
-    // Settings functions
-    
-    window.saveDailyWeight = function(val) {
-      const dateKey = getDateOfDayName(activeDay);
-      dailyWeights[dateKey] = parseFloat(val);
-      settings.weight = parseFloat(val);
-      localStorage.setItem('workout_daily_weights', JSON.stringify(dailyWeights));
-      saveSettings();
-      renderApp();
-    };
-
-    window.calcAvgWeight = function(startOffset, endOffset) {
-      // Helper to calculate average weight over a range of days
-      let sum = 0;
-      let count = 0;
-      const now = new Date();
-      for (let i = startOffset; i <= endOffset; i++) {
-        const d = new Date(now);
-        d.setDate(d.getDate() - i);
-        const y = d.getFullYear();
-        const m = String(d.getMonth() + 1).padStart(2, '0');
-        const dStr = String(d.getDate()).padStart(2, '0');
-        const key = `${y}-${m}-${dStr}`;
-        if (dailyWeights[key]) {
-          sum += dailyWeights[key];
-          count++;
-        }
-      }
-      return count > 0 ? (sum / count).toFixed(1) : '--';
-    };
-
-    window.triggerPlateauBreaker = function() {
-      if (confirm('سيتم خصم 150 سعرة حرارية من تارجت الكارب والدهون لكسر الثبات والاستمرار في النزول. هل أنت متأكد؟')) {
-        let currentCals = parseInt(settings.goalCalories);
-        if (currentCals > 1200) {
-          settings.goalCalories = currentCals - 150;
-          // Deduct 20g Carbs (80 cals) and ~8g Fat (70 cals)
-          settings.goalCarbs = Math.max(50, parseInt(settings.goalCarbs) - 20);
-          settings.goalFat = Math.max(30, parseInt(settings.goalFat) - 8);
-          saveSettings();
-          renderApp();
-          alert('تم التحديث بنجاح! استمر يا بطل.');
-        } else {
-          alert('السعرات منخفضة جداً، لا ينصح بتقليلها أكثر من ذلك. حاول زيادة النشاط الحركي بدلاً من تقليل الأكل.');
-        }
-      }
-    };
-
-    window.updateSetting = function(key, value) {
-      // Handle number values
-      if (['weight', 'height', 'age', 'goalWeight', 'goalCalories', 'goalProtein', 'goalCarbs', 'goalFat', 'restTimer'].includes(key)) {
-        value = parseFloat(value);
-      }
-      settings[key] = value;
-      saveSettings();
-      // Update targets if needed
-      updateTargetsFromSettings();
-      // Apply dark mode if needed
-      if (key === 'darkMode') {
-        applyDarkMode();
-      }
-      renderApp();
-    };
-    
-    function saveSettings() {
-      try {
-        localStorage.setItem('workout_settings', JSON.stringify(settings));
-      } catch(e) {}
-    }
-    
-    function updateTargetsFromSettings() {
-      TARGETS.cal = settings.goalCalories;
-      TARGETS.p = settings.goalProtein;
-      TARGETS.c = settings.goalCarbs;
-      TARGETS.f = settings.goalFat;
-    }
-    
-    // Apply dark mode
-    function applyDarkMode() {
-      if (settings.darkMode) {
-        document.body.style.backgroundColor = '#0f172a';
-        document.body.style.color = '#f8fafc';
-      } else {
-        document.body.style.backgroundColor = '';
-        document.body.style.color = '';
-      }
-    }
 
     // ─── Food Modal ───────────────────────────────────────
     window.openFoodModal = function(mealKey, mode, idx) {
@@ -3997,7 +3347,7 @@
         id: 'custom_' + Date.now(),
         name: food.name,
         category: 'custom',
-        grams: food.defaultGrams || 100,
+        grams: 100,
         per100g: { ...food.per100g }
       });
       saveMeals();
@@ -4153,7 +3503,7 @@
         id: 'search_' + Date.now(),
         name: r.name,
         category: 'custom',
-        grams: r.defaultGrams || 100,
+        grams: 100,
         per100g: { cal: r.cal, p: r.p, c: r.c, f: r.f }
       });
       saveMeals();
