@@ -3779,19 +3779,19 @@
               <div style="margin-top:15px; display:flex; flex-direction:column; gap:10px;">
                 <label style="font-size:13px; font-weight:600;">الأكلة الأساسية (من خطة المدرب):</label>
                 <select style="padding:10px; border-radius:8px; border:1px solid #ddd; width:100%; font-family:inherit;" 
-                        onchange="smartSwapState.baseFood = this.value; smartSwapState.resultGrams = null; renderApp();">
+                        onchange="smartSwapState.baseFood = this.value; smartSwapState.resultGrams = null; smartSwapState.macroDiff = null; renderApp();">
                   <option value="">-- اختر الأكلة الأساسية --</option>
                   ${allFoods.map(f => `<option value="${f.name}" ${smartSwapState.baseFood === f.name ? 'selected' : ''}>${f.name}</option>`).join('')}
                 </select>
                 
                 <label style="font-size:13px; font-weight:600;">الكمية بالجرام:</label>
                 <input type="number" value="${smartSwapState.baseGrams}" 
-                       onchange="smartSwapState.baseGrams = this.value; smartSwapState.resultGrams = null; renderApp();"
+                       onchange="smartSwapState.baseGrams = this.value; smartSwapState.resultGrams = null; smartSwapState.macroDiff = null; renderApp();"
                        style="padding:10px; border-radius:8px; border:1px solid #ddd; width:100%; font-family:inherit;" />
                 
                 <label style="font-size:13px; font-weight:600; margin-top:10px;">الأكلة البديلة:</label>
                 <select style="padding:10px; border-radius:8px; border:1px solid #ddd; width:100%; font-family:inherit;" 
-                        onchange="smartSwapState.targetFood = this.value; smartSwapState.resultGrams = null; renderApp();">
+                        onchange="smartSwapState.targetFood = this.value; smartSwapState.resultGrams = null; smartSwapState.macroDiff = null; renderApp();">
                   <option value="">-- اختر الأكلة البديلة --</option>
                   ${allFoods.map(f => `<option value="${f.name}" ${smartSwapState.targetFood === f.name ? 'selected' : ''}>${f.name}</option>`).join('')}
                 </select>
@@ -3800,9 +3800,36 @@
                 
                 ${smartSwapState.resultGrams !== null ? `
                   <div style="margin-top:15px; padding:15px; background:#ecfdf5; border-radius:8px; border:1px solid #a7f3d0; text-align:center;">
-                    <div style="font-size:14px; color:#065f46; margin-bottom:5px;">لتحصل على نفس الماكروز تحتاج:</div>
+                    <div style="font-size:14px; color:#065f46; margin-bottom:5px;">لتحصل على ${smartSwapState.macroDiff.p === 0 ? 'نفس البروتين' : 'نفس السعرات'} تحتاج:</div>
                     <div style="font-size:24px; font-weight:bold; color:#059669;">${smartSwapState.resultGrams} جرام</div>
                     <div style="font-size:14px; color:#065f46;">من ${smartSwapState.targetFood}</div>
+                  </div>
+                  
+                  <div style="margin-top:10px; padding:12px; background:#fff7ed; border-radius:8px; border:1px solid #fed7aa; font-size:13px;">
+                    <div style="font-weight:bold; color:#c2410c; margin-bottom:8px;">⚠️ تأثير هذا التبديل على الدايت:</div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                      <span>السعرات:</span>
+                      <span style="font-weight:bold; color:${smartSwapState.macroDiff.cal > 0 ? '#ef4444' : '#10b981'};">${smartSwapState.macroDiff.cal > 0 ? '+' : ''}${smartSwapState.macroDiff.cal} kcal</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                      <span>الدهون:</span>
+                      <span style="font-weight:bold; color:${smartSwapState.macroDiff.f > 0 ? '#ef4444' : '#10b981'};">${smartSwapState.macroDiff.f > 0 ? '+' : ''}${smartSwapState.macroDiff.f} غ</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                      <span>الكارب:</span>
+                      <span style="font-weight:bold; color:${smartSwapState.macroDiff.c > 0 ? '#ef4444' : '#10b981'};">${smartSwapState.macroDiff.c > 0 ? '+' : ''}${smartSwapState.macroDiff.c} غ</span>
+                    </div>
+                    
+                    ${(smartSwapState.macroDiff.cal > 50) ? `
+                      <div style="margin-top:8px; color:#b45309; border-top:1px dashed #fdba74; padding-top:8px;">
+                        💡 <b>نصيحة:</b> هذا التبديل زاد سعراتك! لكي لا يفسد هدف نزول الوزن، يُفضل تقليل الكارب أو الدهون من وجبة أخرى اليوم.
+                      </div>
+                    ` : ''}
+                    ${(smartSwapState.macroDiff.cal < -50) ? `
+                      <div style="margin-top:8px; color:#065f46; border-top:1px dashed #6ee7b7; padding-top:8px;">
+                        💡 <b>نصيحة:</b> هذا التبديل وفر لك سعرات! يمكنك إضافة كمية كارب إضافية (مثل الأرز) في وجبتك.
+                      </div>
+                    ` : ''}
                   </div>
                 ` : ''}
               </div>
@@ -3849,10 +3876,10 @@
     // STATE ACTIONS
     // ============================================================
     
-    let smartSwapState = { open: false, baseFood: '', baseGrams: 100, targetFood: '', resultGrams: null };
+    let smartSwapState = { open: false, baseFood: '', baseGrams: 100, targetFood: '', resultGrams: null, macroDiff: null };
 
     window.openSmartSwapModal = function() {
-      smartSwapState = { open: true, baseFood: '', baseGrams: 100, targetFood: '', resultGrams: null };
+      smartSwapState = { open: true, baseFood: '', baseGrams: 100, targetFood: '', resultGrams: null, macroDiff: null };
       renderApp();
     };
     window.closeSmartSwapModal = function() {
@@ -3871,15 +3898,35 @@
         const isProtein = base.per100g.p > 10;
         
         let targetAmount;
+        const bg = smartSwapState.baseGrams;
+        const baseMac = {
+            cal: (base.per100g.cal / 100) * bg,
+            p: (base.per100g.p / 100) * bg,
+            c: (base.per100g.c / 100) * bg,
+            f: (base.per100g.f / 100) * bg
+        };
+
         if (isProtein) {
-            const baseProtein = (base.per100g.p / 100) * smartSwapState.baseGrams;
-            targetAmount = (baseProtein / target.per100g.p) * 100;
+            targetAmount = (baseMac.p / target.per100g.p) * 100;
         } else {
-            const baseCal = (base.per100g.cal / 100) * smartSwapState.baseGrams;
-            targetAmount = (baseCal / target.per100g.cal) * 100;
+            targetAmount = (baseMac.cal / target.per100g.cal) * 100;
         }
         
+        const tg = targetAmount;
+        const targetMac = {
+            cal: (target.per100g.cal / 100) * tg,
+            p: (target.per100g.p / 100) * tg,
+            c: (target.per100g.c / 100) * tg,
+            f: (target.per100g.f / 100) * tg
+        };
+        
         smartSwapState.resultGrams = Math.round(targetAmount);
+        smartSwapState.macroDiff = {
+            cal: Math.round(targetMac.cal - baseMac.cal),
+            p: Math.round(targetMac.p - baseMac.p),
+            c: Math.round(targetMac.c - baseMac.c),
+            f: Math.round(targetMac.f - baseMac.f)
+        };
         renderApp();
       }
     };
